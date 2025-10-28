@@ -45,18 +45,20 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     text-align: center;
+    padding: 20px;
     animation: fadeIn 1s ease forwards;
 }
 
 .index-wrapper h1 {
-    font-size: 24px;
+    font-size: 1.5rem;
     margin-bottom: 20px;
 }
 
 .logo-index {
-    width: 200px;
+    width: 150px;
+    max-width: 80%;
     height: auto;
     margin-bottom: 30px;
 }
@@ -75,7 +77,8 @@ button:hover {
 }
 
 .logo-registro {
-    width: 200px;
+    width: 150px;
+    max-width: 70%;
     height: auto;
     margin-bottom: 20px;
 }
@@ -85,7 +88,7 @@ form {
     width: 100%;
     max-width: 500px;
     background-color: #f9f9f9;
-    padding: 30px;
+    padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -100,16 +103,16 @@ form input[type="text"],
 form select,
 form textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 20px;
     border-radius: 6px;
     border: 1px solid #ccc;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 form textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 100px;
 }
 
 form .btn-submit {
@@ -132,3 +135,51 @@ form .btn-submit {
     }
 }
 
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 768px) {
+    .index-wrapper h1,
+    form label {
+        font-size: 1.2rem;
+    }
+
+    form input[type="text"],
+    form select,
+    form textarea,
+    button {
+        font-size: 0.95rem;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    .logo-index,
+    .logo-registro {
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .index-wrapper h1 {
+        font-size: 1rem;
+    }
+
+    form input[type="text"],
+    form select,
+    form textarea,
+    button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    .logo-index,
+    .logo-registro {
+        width: 100px;
+    }
+}
