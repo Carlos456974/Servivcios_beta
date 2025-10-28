@@ -9,58 +9,24 @@ body {
     color: #333;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
+/* =============================
+   BOTONES
+============================= */
 button {
     cursor: pointer;
     border: none;
     outline: none;
-    background-color: #154C52; /* azul oscuro */
+    background-color: #154C52;
     color: #fff;
-    padding: 12px 24px;
+    padding: 14px;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 1rem;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #0f3b40;
-    transform: scale(1.05);
-}
-
-.container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-/* =============================
-   INDEX.HTML
-============================= */
-.index-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: 20px;
-    animation: fadeIn 1s ease forwards;
-}
-
-.index-wrapper h1 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.logo-index {
-    width: 150px;
-    max-width: 80%;
-    height: auto;
-    margin-bottom: 30px;
+    transform: scale(1.03);
 }
 
 /* =============================
@@ -74,32 +40,32 @@ button:hover {
     min-height: 100vh;
     padding: 20px;
     animation: fadeIn 1s ease forwards;
+    background-color: #fff;
 }
 
 .logo-registro {
-    width: 150px;
-    max-width: 70%;
+    width: 180px;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    animation: fadeIn 1s ease-in-out;
 }
 
-/* Formulario de servicios */
 form {
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     background-color: #f9f9f9;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
 }
 
 form label {
     display: block;
     margin-bottom: 6px;
     font-weight: bold;
+    font-size: 1rem;
 }
 
-form input[type="text"],
 form select,
 form textarea {
     width: 100%;
@@ -108,6 +74,7 @@ form textarea {
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 1rem;
+    box-sizing: border-box;
 }
 
 form textarea {
@@ -115,71 +82,43 @@ form textarea {
     min-height: 100px;
 }
 
-form .btn-submit {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-}
-
 /* =============================
    ANIMACIONES
 ============================= */
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(-15px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 /* =============================
    RESPONSIVE
 ============================= */
 @media (max-width: 768px) {
-    .index-wrapper h1,
-    form label {
-        font-size: 1.2rem;
-    }
-
-    form input[type="text"],
-    form select,
-    form textarea,
-    button {
-        font-size: 0.95rem;
+    .logo-registro {
+        width: 160px;
+        margin-bottom: 20px;
     }
 
     form {
-        padding: 20px;
+        padding: 22px;
     }
 
-    .logo-index,
-    .logo-registro {
-        width: 120px;
+    form label, form select, form textarea, button {
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .index-wrapper h1 {
-        font-size: 1rem;
-    }
-
-    form input[type="text"],
-    form select,
-    form textarea,
-    button {
-        font-size: 0.9rem;
-        padding: 10px;
+    .logo-registro {
+        width: 140px;
     }
 
     form {
-        padding: 15px;
+        width: 95%;
+        padding: 20px;
     }
 
-    .logo-index,
-    .logo-registro {
-        width: 100px;
+    form label, form select, form textarea, button {
+        font-size: 1rem;
     }
 }
