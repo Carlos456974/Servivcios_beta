@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>Registro de Servicios</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="registro-wrapper">
         <img src="Imagenes/Logo SIICOM-MX (1).png" alt="Logo" class="logo-registro">
 
-        <form>
+        <form id="registroTecnico">
             <label for="empresa">Empresa</label>
             <select id="empresa" name="empresa">
                 <option value="Dacis">Dacis</option>
@@ -30,9 +31,7 @@
 
             <label for="categoria">Categoría de servicio</label>
             <select id="categoria" name="categoria">
-                <option value="office">Office</option>
-                <option value="sistemas">Sistemas Casa</option>
-                <option value="otros">Otros</option>
+                <!-- Opciones dinámicas (se cargan desde JS) -->
             </select>
 
             <label for="detalle">Detalle del servicio</label>
