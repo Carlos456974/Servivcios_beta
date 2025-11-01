@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* ======== ESTILOS GLOBALES ======== */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -10,7 +10,7 @@ body {
     justify-content: center;
 }
 
-/* Contenedor principal en ambas páginas */
+/* ======== CONTENEDORES ======== */
 .wrapper,
 .registro-wrapper {
     display: flex;
@@ -23,21 +23,23 @@ body {
     box-sizing: border-box;
 }
 
-/* Logo adaptable */
-.logo, .logo-registro {
-    width: clamp(120px, 35vw, 220px); /* se adapta al ancho de pantalla */
+/* ======== LOGO ======== */
+.logo,
+.logo-registro {
+    width: 160px;        /* tamaño base moderado */
+    max-width: 40vw;
     height: auto;
     margin-bottom: 1.5rem;
     transition: all 0.3s ease-in-out;
 }
 
-/* Botón principal (index) */
+/* ======== BOTÓN PRINCIPAL (index) ======== */
 .btn-index {
     background-color: #1e88e5;
     color: white;
     border: none;
     padding: 0.9rem 2rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -46,16 +48,16 @@ body {
     background-color: #1565c0;
 }
 
-/* Formulario de registro */
+/* ======== FORMULARIO ======== */
 form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     background: #f9f9f9;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
 label {
@@ -64,16 +66,16 @@ label {
 }
 
 input, select, textarea {
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
     padding: 0.7rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border: 1px solid #ccc;
     border-radius: 6px;
 }
 
 textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 70px;
 }
 
 .btn-submit {
@@ -81,7 +83,7 @@ textarea {
     background-color: #1e88e5;
     color: white;
     border: none;
-    padding: 0.9rem;
+    padding: 0.8rem;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -92,49 +94,56 @@ textarea {
 
 /* ======== VISTA MÓVIL ======== */
 @media (max-width: 768px) {
-    body {
-        padding: 0;
-    }
-
     .wrapper,
     .registro-wrapper {
         justify-content: flex-start;
-        padding-top: 10vh; /* sube el contenido hacia arriba */
+        padding-top: 8vh; /* sube el contenido */
     }
 
-    .logo, .logo-registro {
-        width: clamp(100px, 45vw, 160px); /* ajusta tamaño del logo */
+    .logo,
+    .logo-registro {
+        width: 130px;
+        max-width: 35vw;
         margin-bottom: 1.2rem;
     }
 
     form {
         max-width: 90%;
-        padding: 1.2rem;
+        padding: 1rem 1.2rem;
     }
 
     label, input, select, textarea {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
 
-    .btn-index, .btn-submit {
-        font-size: 1rem;
-        padding: 0.8rem;
+    .btn-index,
+    .btn-submit {
+        font-size: 0.95rem;
+        padding: 0.75rem;
     }
 }
 
-/* ======== PANTALLAS PEQUEÑAS (celulares muy chicos) ======== */
+/* ======== PANTALLAS MUY PEQUEÑAS ======== */
 @media (max-width: 480px) {
-    .registro-wrapper,
-    .wrapper {
-        padding-top: 8vh;
+    .wrapper,
+    .registro-wrapper {
+        padding-top: 6vh;
     }
 
-    .logo, .logo-registro {
-        width: clamp(80px, 50vw, 130px);
+    .logo,
+    .logo-registro {
+        width: 110px;
+        margin-bottom: 1rem;
     }
 
     form {
-        padding: 1rem;
+        padding: 0.9rem;
         box-shadow: none;
+    }
+
+    .btn-index,
+    .btn-submit {
+        width: 100%;
+        border-radius: 6px;
     }
 }
