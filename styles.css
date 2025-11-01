@@ -1,180 +1,151 @@
-/* === ESTILOS GENERALES === */
+/* === ESTILOS GLOBALES === */
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fa; /* Fondo más claro */
+  font-family: 'Poppins', sans-serif;
+  background-color: #cde4e6; /* Color más claro (antes era #A8C5C8 aprox, aclarado 3 tonos) */
+  color: #000;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
 }
 
-/* === LOGO GENERAL === */
-.logo {
-  max-width: 340px;
-  width: 55vw;
-  height: auto;
-  margin-bottom: 20px;
-  transition: all 0.3s ease-in-out;
+/* === INDEX === */
+.index-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  text-align: center;
+  padding: 20px;
 }
 
-/* === BOTÓN PRINCIPAL (INDEX) === */
-.main-button {
+.index-container img {
+  width: 180px;
+  max-width: 70%;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+.index-container h1 {
+  font-size: 1.8rem;
+  color: #0f3a3d;
+  margin-bottom: 20px;
+}
+
+.btn-agregar {
   display: inline-block;
   background-color: #154C52;
-  color: #fff;
-  padding: 14px 24px;
-  font-size: 1.1rem;
+  color: white;
+  padding: 15px 30px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
-  text-align: center;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-.main-button:hover {
-  background-color: #0d3439;
+.btn-agregar:hover {
+  background-color: #0f3a3d;
 }
 
-/* === CONTENEDOR INDEX === */
-.index-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100vh;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-/* === FORMULARIO REGISTRO === */
-body.registro-body {
-  background-color: #f7f9fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-}
-
+/* === REGISTRO === */
 .registro-wrapper {
-  width: 92%;
-  max-width: 500px;
-  background: #fff;
-  padding: 35px 25px;
-  border-radius: 14px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  padding: 30px;
 }
 
-/* === LOGO REGISTRO === */
-.logo-registro {
-  width: 60%;
-  max-width: 240px;
+.registro-wrapper img {
+  width: 180px;
+  max-width: 75%;
   height: auto;
   margin-bottom: 25px;
-  transition: all 0.3s ease-in-out;
 }
 
-/* === CAMPOS DEL FORMULARIO === */
-input[type="text"],
-input[type="number"],
-textarea,
-select {
+.registro-form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 420px; /* Antes era más chico */
+}
+
+.registro-form h2 {
+  color: #154C52;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.registro-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.registro-form input,
+.registro-form textarea,
+.registro-form select {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
-  border-radius: 6px;
+  margin-bottom: 15px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
 }
 
-button {
+.registro-form button {
+  width: 100%;
   background-color: #154C52;
   color: white;
+  padding: 14px;
   border: none;
-  padding: 14px 22px;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background 0.3s;
-  width: 100%;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-  background-color: #0d3439;
+.registro-form button:hover {
+  background-color: #0f3a3d;
 }
 
-/* === VISTA RESPONSIVA === */
+/* === RESPONSIVO === */
 @media (max-width: 768px) {
-  .logo {
-    width: 70vw;
-    max-width: 280px;
+  .index-container img {
+    width: 160px;
   }
 
-  .index-container {
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .main-button {
+  .btn-agregar {
+    padding: 12px 25px;
     font-size: 1rem;
-    padding: 12px 20px;
   }
 
-  .registro-wrapper {
-    width: 95%;
-    max-width: 480px;
-    padding: 30px 20px;
-  }
-
-  .logo-registro {
-    width: 65%;
-    max-width: 210px;
-  }
-
-  input, textarea, select, button {
-    font-size: 1rem;
+  .registro-form {
+    padding: 25px;
+    max-width: 90%;
   }
 }
 
 @media (max-width: 480px) {
-  .logo {
-    width: 75vw;
-    max-width: 260px;
+  .index-container img {
+    width: 150px;
   }
 
-  .main-button {
-    width: 90%;
-    padding: 12px 18px;
+  .btn-agregar {
+    padding: 10px 22px;
     font-size: 1rem;
   }
 
-  .index-container {
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .registro-wrapper {
-    width: 95%;
-    padding: 28px 18px;
-  }
-
-  .logo-registro {
-    width: 70%;
-    max-width: 200px;
+  .registro-form {
+    padding: 20px;
+    max-width: 95%;
   }
 }
-
-
