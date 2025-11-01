@@ -10,6 +10,26 @@ body {
 }
 
 /* =============================
+   BOTONES GLOBALES
+============================= */
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: #154C52;
+    color: #fff;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0f3b40;
+    transform: scale(1.03);
+}
+
+/* =============================
    INDEX.HTML
 ============================= */
 .index-wrapper {
@@ -24,7 +44,7 @@ body {
 }
 
 .logo-index {
-    width: min(60%, 320px);
+    width: clamp(120px, 35vw, 260px); /* Escala con la pantalla */
     height: auto;
     margin-bottom: 30px;
     transition: all 0.3s ease;
@@ -32,24 +52,14 @@ body {
 
 .index-wrapper h1 {
     max-width: 600px;
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 2.5vw, 1.4rem); /* Escala el texto también */
     margin-bottom: 25px;
 }
 
 .index-wrapper button {
     padding: 14px 24px;
     border-radius: 8px;
-    font-size: 1rem;
-    background-color: #154C52;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-.index-wrapper button:hover {
-    background-color: #0f3b40;
-    transform: scale(1.05);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
 /* =============================
@@ -66,7 +76,7 @@ body {
 }
 
 .logo-registro {
-    width: min(40%, 220px);
+    width: clamp(110px, 30vw, 200px); /* Escala adaptable */
     height: auto;
     margin-bottom: 25px;
     transition: all 0.3s ease;
@@ -130,37 +140,21 @@ form textarea {
 }
 
 /* =============================
-   RESPONSIVE
+   RESPONSIVE (Refinado)
 ============================= */
 @media (max-width: 768px) {
-    .logo-index {
-        width: 55%;
-    }
-
-    .logo-registro {
-        width: 55%;
-    }
-
-    .index-wrapper h1 {
-        font-size: 1.2rem;
-    }
-
     form {
         padding: 22px;
+    }
+
+    form label, form select, form textarea, button {
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .logo-index {
-        width: 65%;
-    }
-
-    .logo-registro {
-        width: 65%;
-    }
-
-    .index-wrapper h1 {
-        font-size: 1rem;
+    .index-wrapper, .registro-wrapper {
+        padding: 15px;
     }
 
     form {
@@ -168,7 +162,12 @@ form textarea {
         padding: 20px;
     }
 
+    .index-wrapper h1 {
+        font-size: 1rem;
+    }
+
     form label, form select, form textarea, button {
         font-size: 1rem;
     }
 }
+
