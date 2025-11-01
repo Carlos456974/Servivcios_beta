@@ -1,173 +1,140 @@
-/* =============================
-   ESTILOS GLOBALES
-============================= */
+/* Estilos generales */
 body {
     margin: 0;
-    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #ffffff;
     color: #333;
-}
-
-/* =============================
-   BOTONES GLOBALES
-============================= */
-button {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background-color: #154C52;
-    color: #fff;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-    background-color: #0f3b40;
-    transform: scale(1.03);
-}
-
-/* =============================
-   INDEX.HTML
-============================= */
-.index-wrapper {
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    min-height: 100vh;
-    padding: 20px;
-    animation: fadeIn 1s ease forwards;
 }
 
-.logo-index {
-    width: clamp(120px, 35vw, 260px); /* Escala con la pantalla */
-    height: auto;
-    margin-bottom: 30px;
-    transition: all 0.3s ease;
-}
-
-.index-wrapper h1 {
-    max-width: 600px;
-    font-size: clamp(1rem, 2.5vw, 1.4rem); /* Escala el texto también */
-    margin-bottom: 25px;
-}
-
-.index-wrapper button {
-    padding: 14px 24px;
-    border-radius: 8px;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-}
-
-/* =============================
-   REGISTRO.HTML
-============================= */
+/* Contenedor principal en ambas páginas */
+.wrapper,
 .registro-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 20px;
-    animation: fadeIn 1s ease forwards;
-}
-
-.logo-registro {
-    width: clamp(110px, 30vw, 200px); /* Escala adaptable */
-    height: auto;
-    margin-bottom: 25px;
-    transition: all 0.3s ease;
-}
-
-form {
     width: 100%;
-    max-width: 480px;
-    background-color: #f9f9f9;
-    padding: 28px;
-    border-radius: 14px;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
-}
-
-form label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-form select,
-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
+    padding: 1rem;
     box-sizing: border-box;
 }
 
-form textarea {
+/* Logo adaptable */
+.logo, .logo-registro {
+    width: clamp(120px, 35vw, 220px); /* se adapta al ancho de pantalla */
+    height: auto;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Botón principal (index) */
+.btn-index {
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    padding: 0.9rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-index:hover {
+    background-color: #1565c0;
+}
+
+/* Formulario de registro */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+input, select, textarea {
+    margin-top: 0.5rem;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 80px;
 }
 
 .btn-submit {
-    width: 100%;
-    padding: 14px;
+    margin-top: 1.5rem;
+    background-color: #1e88e5;
+    color: white;
     border: none;
+    padding: 0.9rem;
     border-radius: 8px;
-    background-color: #154C52;
-    color: #fff;
-    font-size: 1rem;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: background-color 0.3s ease;
 }
-
 .btn-submit:hover {
-    background-color: #0f3b40;
-    transform: scale(1.03);
+    background-color: #1565c0;
 }
 
-/* =============================
-   ANIMACIONES
-============================= */
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(-15px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-/* =============================
-   RESPONSIVE (Refinado)
-============================= */
+/* ======== VISTA MÓVIL ======== */
 @media (max-width: 768px) {
-    form {
-        padding: 22px;
+    body {
+        padding: 0;
     }
 
-    form label, form select, form textarea, button {
+    .wrapper,
+    .registro-wrapper {
+        justify-content: flex-start;
+        padding-top: 10vh; /* sube el contenido hacia arriba */
+    }
+
+    .logo, .logo-registro {
+        width: clamp(100px, 45vw, 160px); /* ajusta tamaño del logo */
+        margin-bottom: 1.2rem;
+    }
+
+    form {
+        max-width: 90%;
+        padding: 1.2rem;
+    }
+
+    label, input, select, textarea {
+        font-size: 0.95rem;
+    }
+
+    .btn-index, .btn-submit {
         font-size: 1rem;
+        padding: 0.8rem;
     }
 }
 
+/* ======== PANTALLAS PEQUEÑAS (celulares muy chicos) ======== */
 @media (max-width: 480px) {
-    .index-wrapper, .registro-wrapper {
-        padding: 15px;
+    .registro-wrapper,
+    .wrapper {
+        padding-top: 8vh;
+    }
+
+    .logo, .logo-registro {
+        width: clamp(80px, 50vw, 130px);
     }
 
     form {
-        width: 95%;
-        padding: 20px;
-    }
-
-    .index-wrapper h1 {
-        font-size: 1rem;
-    }
-
-    form label, form select, form textarea, button {
-        font-size: 1rem;
+        padding: 1rem;
+        box-shadow: none;
     }
 }
-
