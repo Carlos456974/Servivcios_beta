@@ -21,9 +21,9 @@ body {
   padding: 20px;
 }
 
-.index-container img {
-  width: 180px;
-  max-width: 70%;
+.index-container img.logo {
+  width: 220px;
+  max-width: 75%;
   height: auto;
   margin-bottom: 25px;
 }
@@ -62,7 +62,7 @@ body {
 }
 
 .registro-wrapper img {
-  width: 160px;
+  width: 180px;
   max-width: 80%;
   height: auto;
   margin-bottom: 25px;
@@ -70,11 +70,11 @@ body {
 
 .registro-container {
   background-color: #ffffff;
-  padding: 35px 30px;
+  padding: 40px 30px;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 500px; /* Más grande que antes */
+  max-width: 550px; /* Más amplio para mejor legibilidad */
 }
 
 .registro-container h2 {
@@ -120,8 +120,8 @@ body {
 
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
-  .index-container img {
-    width: 160px;
+  .index-container img.logo {
+    width: 200px;
   }
 
   .btn-agregar {
@@ -130,23 +130,25 @@ body {
   }
 
   .registro-container {
-    padding: 25px;
+    padding: 30px;
     max-width: 90%;
   }
 }
 
 @media (max-width: 480px) {
-  .index-container img {
-    width: 150px;
+  .index-container img.logo {
+    width: 180px;
   }
 
   .btn-agregar {
-    padding: 10px 25px;
+    padding: 12px 25px;
     font-size: 1rem;
   }
 
   .registro-container {
-    padding: 25px;
+    padding: 30px;
     max-width: 95%;
   }
 }
+
+
