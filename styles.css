@@ -1,149 +1,143 @@
-/* ======== ESTILOS GLOBALES ======== */
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #ffffff;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* =============================
+   RESET + GLOBAL
+============================= */
+* { box-sizing: border-box; }
+html,body { height: 100%; }
+body{
+  margin:0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #ffffff;
+  color:#222;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-/* ======== CONTENEDORES ======== */
-.wrapper,
-.registro-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
-    padding: 1rem;
-    box-sizing: border-box;
+/* =============================
+   PAGE WRAPPER (shared)
+   ensures centered layout but allows form scrolling
+============================= */
+.page-wrapper {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  gap: 18px;
 }
 
-/* ======== LOGO ======== */
-.logo,
-.logo-registro {
-    width: 160px;        /* tamaño base moderado */
-    max-width: 40vw;
-    height: auto;
-    margin-bottom: 1.5rem;
-    transition: all 0.3s ease-in-out;
+/* Logo: scale by viewport but capped by px and by height */
+.logo {
+  width: clamp(110px, 32vw, 220px);   /* responsive width */
+  max-height: 20vh;                   /* never taller than 20% of viewport height */
+  height: auto;
+  display:block;
+  object-fit:contain;
 }
 
-/* ======== BOTÓN PRINCIPAL (index) ======== */
-.btn-index {
-    background-color: #1e88e5;
-    color: white;
-    border: none;
-    padding: 0.9rem 2rem;
-    font-size: 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.btn-index:hover {
-    background-color: #1565c0;
+/* Small hero text under logo (index) */
+.hero-text h1{
+  margin:0 0 6px 0;
+  font-size: clamp(1.0rem, 3.2vw, 1.4rem);
+  line-height:1.2;
+  text-align:center;
 }
 
-/* ======== FORMULARIO ======== */
-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 380px;
-    background: #f9f9f9;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+.hero-text p{
+  margin:0;
+  color:#555;
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
+  text-align:center;
 }
 
-label {
-    margin-top: 1rem;
-    font-weight: 600;
+/* CTA button */
+.btn {
+  display:inline-block;
+  text-decoration:none;
+  text-align:center;
+  padding: 12px 18px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  border: none;
+}
+.btn-primary {
+  background:#154C52;
+  color:#fff;
+}
+.btn-primary:active { transform: translateY(1px); }
+
+/* Make the CTA within view easily on mobile */
+.index-page .cta { width:100%; display:flex; justify-content:center; }
+
+/* =============================
+   FORM SHELL for registro (keeps form visible + scrollable)
+============================= */
+.form-shell{
+  width:100%;
+  max-width:520px;
+  /* limit height so keyboard won't push everything off-screen */
+  max-height: calc(100vh - 160px);
+  overflow:auto;
+  padding: 0; /* form has its own padding */
 }
 
-input, select, textarea {
-    margin-top: 0.4rem;
-    padding: 0.7rem;
-    font-size: 0.95rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+/* FORM */
+form{
+  background:#f7f8fa;
+  border-radius:12px;
+  padding:20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-textarea {
-    resize: vertical;
-    min-height: 70px;
+form h2{
+  margin:0 0 6px 0;
+  font-size:1.1rem;
+  text-align:center;
+  color:#154C52;
 }
 
-.btn-submit {
-    margin-top: 1.5rem;
-    background-color: #1e88e5;
-    color: white;
-    border: none;
-    padding: 0.8rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.btn-submit:hover {
-    background-color: #1565c0;
+/* labels + inputs */
+label{ font-weight:600; font-size:0.95rem; margin-top:6px; }
+select, textarea, input[type="text"]{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #d0d7dc;
+  font-size:1rem;
+  background:white;
 }
 
-/* ======== VISTA MÓVIL ======== */
-@media (max-width: 768px) {
-    .wrapper,
-    .registro-wrapper {
-        justify-content: flex-start;
-        padding-top: 8vh; /* sube el contenido */
-    }
+/* textarea size */
+textarea{ min-height:110px; resize:vertical; }
 
-    .logo,
-    .logo-registro {
-        width: 130px;
-        max-width: 35vw;
-        margin-bottom: 1.2rem;
-    }
+/* hidden helper */
+.hidden{ display:none !important; }
 
-    form {
-        max-width: 90%;
-        padding: 1rem 1.2rem;
-    }
+/* form actions */
+.form-actions{ display:flex; gap:10px; margin-top:6px; }
+.btn.full{ width:100%; }
 
-    label, input, select, textarea {
-        font-size: 0.9rem;
-    }
-
-    .btn-index,
-    .btn-submit {
-        font-size: 0.95rem;
-        padding: 0.75rem;
-    }
+/* =============================
+   RESPONSIVE TWEAKS
+   Aim: keep elements visible on phones, reduce gaps
+============================= */
+@media (max-width: 900px){
+  .page-wrapper{ gap:14px; padding:14px; }
+  .logo{ width: clamp(100px, 30vw, 200px); max-height:18vh; }
+  .form-shell{ max-height: calc(100vh - 140px); }
+  textarea{ min-height:90px; }
 }
 
-/* ======== PANTALLAS MUY PEQUEÑAS ======== */
-@media (max-width: 480px) {
-    .wrapper,
-    .registro-wrapper {
-        padding-top: 6vh;
-    }
-
-    .logo,
-    .logo-registro {
-        width: 110px;
-        margin-bottom: 1rem;
-    }
-
-    form {
-        padding: 0.9rem;
-        box-shadow: none;
-    }
-
-    .btn-index,
-    .btn-submit {
-        width: 100%;
-        border-radius: 6px;
-    }
+@media (max-width: 480px){
+  /* Slightly smaller logo and tighter spacing on small phones */
+  .page-wrapper{ gap:10px; padding:12px; justify-content:flex-start; padding-top:6vh; }
+  .logo{ width: clamp(90px, 40vw, 160px); max-height:16vh; }
+  .form-shell{ max-height: calc(100vh - 120px); }
+  form{ padding:14px; gap:8px; }
+  select, textarea, input[type="text"]{ font-size:0.98rem; padding:10px; }
+  .hero-text h1{ font-size:1rem; }
 }
