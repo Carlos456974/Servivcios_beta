@@ -10,23 +10,46 @@ body {
 }
 
 /* =============================
-   BOTONES
+   INDEX.HTML
 ============================= */
-button {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background-color: #154C52;
-    color: #fff;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+.index-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 20px;
+    animation: fadeIn 1s ease forwards;
 }
 
-button:hover {
+.logo-index {
+    width: min(60%, 320px);
+    height: auto;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.index-wrapper h1 {
+    max-width: 600px;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+}
+
+.index-wrapper button {
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #154C52;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.index-wrapper button:hover {
     background-color: #0f3b40;
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 /* =============================
@@ -40,14 +63,13 @@ button:hover {
     min-height: 100vh;
     padding: 20px;
     animation: fadeIn 1s ease forwards;
-    background-color: #fff;
 }
 
 .logo-registro {
-    width: 180px;
+    width: min(40%, 220px);
     height: auto;
     margin-bottom: 25px;
-    animation: fadeIn 1s ease-in-out;
+    transition: all 0.3s ease;
 }
 
 form {
@@ -82,6 +104,23 @@ form textarea {
     min-height: 100px;
 }
 
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #154C52;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0f3b40;
+    transform: scale(1.03);
+}
+
 /* =============================
    ANIMACIONES
 ============================= */
@@ -94,23 +133,34 @@ form textarea {
    RESPONSIVE
 ============================= */
 @media (max-width: 768px) {
+    .logo-index {
+        width: 55%;
+    }
+
     .logo-registro {
-        width: 160px;
-        margin-bottom: 20px;
+        width: 55%;
+    }
+
+    .index-wrapper h1 {
+        font-size: 1.2rem;
     }
 
     form {
         padding: 22px;
     }
-
-    form label, form select, form textarea, button {
-        font-size: 1rem;
-    }
 }
 
 @media (max-width: 480px) {
+    .logo-index {
+        width: 65%;
+    }
+
     .logo-registro {
-        width: 140px;
+        width: 65%;
+    }
+
+    .index-wrapper h1 {
+        font-size: 1rem;
     }
 
     form {
