@@ -22,7 +22,7 @@ body {
 }
 
 .index-container img.logo {
-  width: 220px;
+  width: 260px;
   max-width: 75%;
   height: auto;
   margin-bottom: 25px;
@@ -31,14 +31,14 @@ body {
 .index-container h1 {
   font-size: 1.8rem;
   color: #154C52;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .btn-agregar {
   display: inline-block;
   background-color: #154C52;
   color: white;
-  padding: 15px 35px;
+  padding: 14px 35px;
   border: none;
   border-radius: 10px;
   text-decoration: none;
@@ -56,25 +56,26 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centrado vertical */
+  align-items: center; /* Centrado horizontal */
   padding: 40px 20px;
+  background-color: #ffffff;
 }
 
 .registro-wrapper img {
-  width: 180px;
+  width: 200px;
   max-width: 80%;
   height: auto;
   margin-bottom: 25px;
 }
 
 .registro-container {
-  background-color: #ffffff;
-  padding: 40px 30px;
+  background-color: #f9f9f9; /* Fondo suave para destacar */
+  padding: 45px 35px;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 550px; /* Más amplio para mejor legibilidad */
+  max-width: 600px; /* Tamaño cómodo en pantallas grandes */
 }
 
 .registro-container h2 {
@@ -121,7 +122,7 @@ body {
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
   .index-container img.logo {
-    width: 200px;
+    width: 220px;
   }
 
   .btn-agregar {
@@ -130,14 +131,18 @@ body {
   }
 
   .registro-container {
-    padding: 30px;
-    max-width: 90%;
+    padding: 35px 25px;
+    max-width: 92%;
+  }
+
+  .registro-wrapper img {
+    width: 180px;
   }
 }
 
 @media (max-width: 480px) {
   .index-container img.logo {
-    width: 180px;
+    width: 200px;
   }
 
   .btn-agregar {
@@ -146,9 +151,11 @@ body {
   }
 
   .registro-container {
-    padding: 30px;
+    padding: 30px 20px;
     max-width: 95%;
   }
+
+  .registro-wrapper img {
+    width: 160px;
+  }
 }
-
-
