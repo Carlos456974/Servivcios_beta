@@ -1,44 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Registro de Servicios</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Servicio</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="registro-body">
-    <div class="registro-wrapper">
-        <img src="Imagenes/Logo SIICOM-MX (1).png" alt="Logo" class="logo-registro">
+<body>
+  <div class="registro-wrapper">
+    <img src="logo.png" alt="Logo">
+    <div class="registro-container">
+      <h2>Registrar Servicio Realizado</h2>
+      <form>
+        <label for="nombre">Nombre del Cliente</label>
+        <input type="text" id="nombre" name="nombre" required>
 
-        <form id="registroTecnico">
-            <label for="empresa">Empresa</label>
-            <select id="empresa" name="empresa">
-                <option value="Dacis">Dacis</option>
-                <option value="GCB">GCB</option>
-                <option value="Grupo Francisco">Grupo Francisco</option>
-                <option value="Verum">Verum</option>
-                <option value="Bakertilly">Bakertilly</option>
-                <option value="Inecex">Inecex</option>
-                <option value="Comextaa">Comextaa</option>
-                <option value="TAM">TAM</option>
-            </select>
+        <label for="servicio">Servicio Realizado</label>
+        <input type="text" id="servicio" name="servicio" required>
 
-            <label for="tipo">Tipo de servicio</label>
-            <select id="tipo" name="tipo">
-                <option value="software">Software</option>
-                <option value="hardware">Hardware</option>
-            </select>
+        <label for="comentarios">Comentarios</label>
+        <textarea id="comentarios" name="comentarios" rows="4"></textarea>
 
-            <label for="categoria">Categoría de servicio</label>
-            <select id="categoria" name="categoria">
-                <!-- Opciones dinámicas (se cargan desde JS) -->
-            </select>
-
-            <label for="detalle">Detalle del servicio</label>
-            <textarea id="detalle" name="detalle" placeholder="Describe el servicio realizado..."></textarea>
-
-            <button type="submit" class="btn-submit">Guardar Reporte</button>
-        </form>
+        <button type="submit">Guardar Servicio</button>
+      </form>
     </div>
+  </div>
 </body>
 </html>
