@@ -51,6 +51,15 @@ body {
 }
 
 /* === FORMULARIO REGISTRO === */
+body.registro-body {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
 .registro-wrapper {
   width: 90%;
   max-width: 420px;
@@ -61,6 +70,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+/* === LOGO REGISTRO === */
+.logo-registro {
+  width: 55%;
+  max-width: 220px;
+  height: auto;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
 }
 
 /* === CAMPOS DEL FORMULARIO === */
@@ -113,6 +132,11 @@ button:hover {
     padding: 20px 15px;
   }
 
+  .logo-registro {
+    width: 65%;
+    max-width: 200px;
+  }
+
   input, textarea, select, button {
     font-size: 0.95rem;
   }
@@ -134,4 +158,10 @@ button:hover {
     width: 95%;
     padding: 20px 15px;
   }
+
+  .logo-registro {
+    width: 70%;
+    max-width: 180px;
+  }
 }
+
