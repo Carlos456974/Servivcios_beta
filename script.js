@@ -1,48 +1,81 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tipoServicio = document.getElementById("tipo");
-    const categoriaSelect = document.getElementById("categoria");
-    const form = document.getElementById("registroTecnico");
+  const tipo = document.getElementById("tipo");
+  const categoria = document.getElementById("categoria");
+  const form = document.getElementById("registroTecnico");
+  const otroContainer = document.getElementById("otroContainer");
+  const categoriaOtro = document.getElementById("categoria_otro");
 
-    const categorias = {
-        software: [
-            "Office",
-            "Sistema de pedimentos",
-            "Validador",
-            "Problemas con actualizaciones",
-            "Problemas con páginas",
-            "Otros (escribir cuál)"
-        ],
-        hardware: [
-            "Problemas con periféricos",
-            "Equipo no enciende",
-            "Equipo no da imagen",
-            "Otros (escribir cuál)"
-        ]
-    };
+  const categorias = {
+    software: [
+      "Office",
+      "Sistema de pedimentos",
+      "Validador",
+      "Problemas con actualizaciones",
+      "Problemas con páginas",
+      "Otros (escribir cuál)"
+    ],
+    hardware: [
+      "Problemas con periféricos",
+      "Equipo no enciende",
+      "Equipo no da imagen",
+      "Otros (escribir cuál)"
+    ]
+  };
 
-    // Cargar categorías por defecto (software)
-    function cargarCategorias(tipo) {
-        categoriaSelect.innerHTML = "";
-        categorias[tipo].forEach(cat => {
-            const option = document.createElement("option");
-            option.value = cat;
-            option.textContent = cat;
-            categoriaSelect.appendChild(option);
-        });
+  function llenarCategorias(t) {
+    categoria.innerHTML = "";
+    categorias[t].forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c;
+      opt.textContent = c;
+      categoria.appendChild(opt);
+    });
+    // si el primero es "Otros..." ocultar el campo hasta seleccionar
+    verificarOtro();
+  }
+
+  function verificarOtro() {
+    if (categoria.value && categoria.value.toLowerCase().includes("otros")) {
+      otroContainer.classList.remove("hidden");
+      categoriaOtro.required = true;
+    } else {
+      otroContainer.classList.add("hidden");
+      if (categoriaOtro) categoriaOtro.required = false;
+      if (categoriaOtro) categoriaOtro.value = "";
     }
+  }
 
-    tipoServicio.addEventListener("change", () => {
-        cargarCategorias(tipoServicio.value);
-    });
+  // eventos
+  if (tipo) {
+    tipo.addEventListener("change", () => llenarCategorias(tipo.value));
+  }
+  if (categoria) {
+    categoria.addEventListener("change", verificarOtro);
+  }
 
-    // Inicialización
-    cargarCategorias("software");
+  // inicializar
+  if (tipo) llenarCategorias(tipo.value || "software");
 
-    // Simulación de guardado
+  // submit demo
+  if (form) {
     form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        alert("Reporte guardado (modo demo, sin base de datos aún)");
-        form.reset();
-        cargarCategorias("software");
+      e.preventDefault();
+      // recolectar datos básicos para demo
+      const data = {
+        empresa: form.empresa?.value || "",
+        tipo: form.tipo?.value || "",
+        categoria: form.categoria?.value || "",
+        categoria_otro: form.categoria_otro?.value || "",
+        detalle: form.detalle?.value || ""
+      };
+      // mostrar confirmación visual (puedes reemplazar por envio XHR/PHP)
+      alert("Reporte guardado (modo demo):\n\n" +
+            "Empresa: " + data.empresa + "\n" +
+            "Tipo: " + data.tipo + "\n" +
+            "Categoría: " + (data.categoria_otro || data.categoria) + "\n\n" +
+            "Detalle: " + data.detalle.slice(0,120) + (data.detalle.length>120?"...":""));
+      form.reset();
+      llenarCategorias("software");
     });
+  }
 });
