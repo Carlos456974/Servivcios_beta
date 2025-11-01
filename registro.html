@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Registro de Servicios</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Registro de Servicios</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="registro-wrapper">
-        <img src="Imagenes/Logo SIICOM-MX (1).png" alt="Logo" class="logo-registro">
+  <div class="page-wrapper registro-page">
+    <img src="Imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM" class="logo" id="logoRegistro">
 
-        <form id="registroTecnico">
-            <label for="empresa">Empresa</label>
-            <select id="empresa" name="empresa">
-                <option value="Dacis">Dacis</option>
-                <option value="GCB">GCB</option>
-                <option value="Grupo Francisco">Grupo Francisco</option>
-                <option value="Verum">Verum</option>
-                <option value="Bakertilly">Bakertilly</option>
-                <option value="Inecex">Inecex</option>
-                <option value="Comextaa">Comextaa</option>
-                <option value="TAM">TAM</option>
-            </select>
+    <!-- Contenedor que mantiene el formulario centrado y scrollable si falta espacio -->
+    <div class="form-shell" role="main">
+      <form id="registroTecnico" novalidate>
+        <h2>Nuevo reporte</h2>
 
-            <label for="tipo">Tipo de servicio</label>
-            <select id="tipo" name="tipo">
-                <option value="software">Software</option>
-                <option value="hardware">Hardware</option>
-            </select>
+        <label for="empresa">Empresa</label>
+        <select id="empresa" name="empresa" required>
+          <option value="">Selecciona una empresa...</option>
+          <option value="Dacis">Dacis</option>
+          <option value="GCB">GCB</option>
+          <option value="Grupo Francisco">Grupo Francisco</option>
+          <option value="Verum">Verum</option>
+          <option value="Bakertilly">Bakertilly</option>
+          <option value="Inecex">Inecex</option>
+          <option value="Comextaa">Comextaa</option>
+          <option value="TAM">TAM</option>
+        </select>
 
-            <label for="categoria">Categoría de servicio</label>
-            <select id="categoria" name="categoria"></select>
+        <label for="tipo">Tipo de servicio</label>
+        <select id="tipo" name="tipo" required>
+          <option value="software">Software</option>
+          <option value="hardware">Hardware</option>
+        </select>
 
-            <label for="detalle">Detalle del servicio</label>
-            <textarea id="detalle" name="detalle" placeholder="Describe el servicio realizado..."></textarea>
+        <label for="categoria">Categoría de servicio</label>
+        <select id="categoria" name="categoria" required></select>
 
-            <button type="submit" class="btn-submit">Guardar Reporte</button>
-        </form>
+        <!-- Campo que aparece solo si la categoría es "Otros (escribir cuál)" -->
+        <div id="otroContainer" class="hidden">
+          <label for="categoria_otro">Especificar (otros)</label>
+          <input id="categoria_otro" name="categoria_otro" type="text" placeholder="Describe la categoría">
+        </div>
+
+        <label for="detalle">Detalle del servicio</label>
+        <textarea id="detalle" name="detalle" placeholder="Describe el servicio realizado..." required></textarea>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary full">Guardar Reporte</button>
+        </div>
+      </form>
     </div>
+  </div>
 </body>
 </html>
