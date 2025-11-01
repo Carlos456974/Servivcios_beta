@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  background-color: #f7f9fa; /* Fondo más claro */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +13,7 @@ body {
 
 /* === LOGO GENERAL === */
 .logo {
-  max-width: 320px;
+  max-width: 340px;
   width: 55vw;
   height: auto;
   margin-bottom: 20px;
@@ -45,14 +45,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  padding: 20px;
   text-align: center;
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* === FORMULARIO REGISTRO === */
 body.registro-body {
-  background-color: #f2f2f2;
+  background-color: #f7f9fa;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,12 +63,12 @@ body.registro-body {
 }
 
 .registro-wrapper {
-  width: 90%;
-  max-width: 420px;
+  width: 92%;
+  max-width: 500px;
   background: #fff;
-  padding: 25px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 35px 25px;
+  border-radius: 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,10 +77,10 @@ body.registro-body {
 
 /* === LOGO REGISTRO === */
 .logo-registro {
-  width: 55%;
-  max-width: 220px;
+  width: 60%;
+  max-width: 240px;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   transition: all 0.3s ease-in-out;
 }
 
@@ -88,8 +90,8 @@ input[type="number"],
 textarea,
 select {
   width: 100%;
-  padding: 10px;
-  margin: 8px 0;
+  padding: 12px;
+  margin: 10px 0;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
@@ -99,11 +101,12 @@ button {
   background-color: #154C52;
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 14px 22px;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s;
+  width: 100%;
 }
 
 button:hover {
@@ -113,13 +116,15 @@ button:hover {
 /* === VISTA RESPONSIVA === */
 @media (max-width: 768px) {
   .logo {
-    width: 65vw;
+    width: 70vw;
     max-width: 280px;
   }
 
   .index-container {
     justify-content: center;
-    padding-top: 0;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
   }
 
   .main-button {
@@ -129,23 +134,24 @@ button:hover {
 
   .registro-wrapper {
     width: 95%;
-    padding: 20px 15px;
+    max-width: 480px;
+    padding: 30px 20px;
   }
 
   .logo-registro {
     width: 65%;
-    max-width: 200px;
+    max-width: 210px;
   }
 
   input, textarea, select, button {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .logo {
-    width: 70vw;
-    max-width: 250px;
+    width: 75vw;
+    max-width: 260px;
   }
 
   .main-button {
@@ -154,14 +160,21 @@ button:hover {
     font-size: 1rem;
   }
 
+  .index-container {
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+
   .registro-wrapper {
     width: 95%;
-    padding: 20px 15px;
+    padding: 28px 18px;
   }
 
   .logo-registro {
     width: 70%;
-    max-width: 180px;
+    max-width: 200px;
   }
 }
+
 
