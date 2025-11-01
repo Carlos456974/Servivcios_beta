@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #cde4e6; /* Color más claro (antes era #A8C5C8 aprox, aclarado 3 tonos) */
+  background-color: #ffffff; /* Fondo blanco */
   color: #000;
   display: flex;
   flex-direction: column;
@@ -15,8 +15,8 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centrado vertical */
+  align-items: center;     /* Centrado horizontal */
   text-align: center;
   padding: 20px;
 }
@@ -25,12 +25,12 @@ body {
   width: 180px;
   max-width: 70%;
   height: auto;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .index-container h1 {
   font-size: 1.8rem;
-  color: #0f3a3d;
+  color: #154C52;
   margin-bottom: 20px;
 }
 
@@ -38,7 +38,7 @@ body {
   display: inline-block;
   background-color: #154C52;
   color: white;
-  padding: 15px 30px;
+  padding: 15px 35px;
   border: none;
   border-radius: 10px;
   text-decoration: none;
@@ -58,50 +58,51 @@ body {
   flex-direction: column;
   justify-content: center; /* Centra verticalmente */
   align-items: center; /* Centra horizontalmente */
-  padding: 30px;
+  padding: 40px 20px;
 }
 
 .registro-wrapper img {
-  width: 180px;
-  max-width: 75%;
+  width: 160px;
+  max-width: 80%;
   height: auto;
   margin-bottom: 25px;
 }
 
-.registro-form {
+.registro-container {
   background-color: #ffffff;
-  padding: 30px;
+  padding: 35px 30px;
   border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 420px; /* Antes era más chico */
+  max-width: 500px; /* Más grande que antes */
 }
 
-.registro-form h2 {
+.registro-container h2 {
   color: #154C52;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.registro-form label {
+.registro-container label {
   display: block;
   font-weight: 600;
   margin-bottom: 8px;
   color: #333;
 }
 
-.registro-form input,
-.registro-form textarea,
-.registro-form select {
+.registro-container input,
+.registro-container textarea,
+.registro-container select {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
-.registro-form button {
+.registro-container button {
   width: 100%;
   background-color: #154C52;
   color: white;
@@ -113,7 +114,7 @@ body {
   transition: background 0.3s ease;
 }
 
-.registro-form button:hover {
+.registro-container button:hover {
   background-color: #0f3a3d;
 }
 
@@ -124,11 +125,11 @@ body {
   }
 
   .btn-agregar {
-    padding: 12px 25px;
+    padding: 12px 28px;
     font-size: 1rem;
   }
 
-  .registro-form {
+  .registro-container {
     padding: 25px;
     max-width: 90%;
   }
@@ -140,12 +141,12 @@ body {
   }
 
   .btn-agregar {
-    padding: 10px 22px;
+    padding: 10px 25px;
     font-size: 1rem;
   }
 
-  .registro-form {
-    padding: 20px;
+  .registro-container {
+    padding: 25px;
     max-width: 95%;
   }
 }
