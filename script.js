@@ -44,27 +44,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoriaOtro = document.getElementById("categoria_otro");
 
   // --- LLENAR CLIENTES ---
-  clientes.forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = c;
-    clienteSelect.appendChild(opt);
-  });
+  if (clienteSelect) {
+    clientes.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c;
+      opt.textContent = c;
+      clienteSelect.appendChild(opt);
+    });
 
-  // --- Mostrar campo manual si elige "Otro" ---
-  clienteSelect.addEventListener("change", () => {
-    if (clienteSelect.value.includes("Otro")) {
-      clienteManual.classList.remove("hidden");
-      clienteManual.required = true;
-    } else {
-      clienteManual.classList.add("hidden");
-      clienteManual.required = false;
-      clienteManual.value = "";
-    }
-  });
+    // Mostrar campo manual si elige "Otro"
+    clienteSelect.addEventListener("change", () => {
+      if (clienteSelect.value.includes("Otro")) {
+        clienteManual.classList.remove("hidden");
+        clienteManual.required = true;
+      } else {
+        clienteManual.classList.add("hidden");
+        clienteManual.required = false;
+        clienteManual.value = "";
+      }
+    });
+  }
 
   // --- Llenar categorías ---
   function llenarCategorias(tipoSeleccionado) {
+    if (!categoria) return;
     categoria.innerHTML = "";
     categorias[tipoSeleccionado].forEach(c => {
       const opt = document.createElement("option");
@@ -77,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Mostrar campo si selecciona "Otros" ---
   function verificarOtro() {
+    if (!categoria || !otroContainer) return;
     if (categoria.value && categoria.value.toLowerCase().includes("otros")) {
       otroContainer.classList.remove("hidden");
       categoriaOtro.required = true;
@@ -87,33 +91,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  tipo.addEventListener("change", () => llenarCategorias(tipo.value));
-  categoria.addEventListener("change", verificarOtro);
+  if (tipo) {
+    tipo.addEventListener("change", () => llenarCategorias(tipo.value));
+  }
 
-  // Inicializar por defecto
-  llenarCategorias(tipo.value || "software");
+  if (categoria) {
+    categoria.addEventListener("change", verificarOtro);
+  }
+
+  // Inicializar categorías por defecto
+  if (tipo) llenarCategorias(tipo.value || "software");
 
   // --- Envío del formulario ---
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    const data = {
-      cliente: clienteSelect.value.includes("Otro") ? clienteManual.value : clienteSelect.value,
-      tipo: tipo.value,
-      categoria: categoria.value,
-      categoria_otro: categoriaOtro.value,
-      titulo: document.getElementById("titulo").value,
-      detalles: document.getElementById("detalles").value,
-      firma: document.getElementById("firma").value,
-      fecha: new Date().toLocaleDateString()
-    };
+      const data = {
+        cliente: clienteSelect?.value.includes("Otro")
+          ? clienteManual.value
+          : clienteSelect?.value || "",
+        tipo: tipo?.value || "",
+        categoria: categoria?.value || "",
+        categoria_otro: categoriaOtro?.value || "",
+        titulo: document.getElementById("titulo")?.value || "",
+        detalles: document.getElementById("detalles")?.value || "",
+        firma: document.getElementById("firma")?.value || "",
+        fecha: new Date().toLocaleDateString()
+      };
 
-    // Guardar en localStorage temporal para pasarlo a reportes.html
-    localStorage.setItem("reporteData", JSON.stringify(data));
+      // Guardar en localStorage temporal para pasarlo a reportes.html
+      localStorage.setItem("reporteData", JSON.stringify(data));
 
-    // Redirigir a reportes.html
-    window.location.href = "reportes.html";
-  });
+      // Redirigir a reportes.html
+      window.location.href = "reportes.html";
+    });
+  }
+
+  // --- BOTÓN DE REPORTE EN EL INDEX (si existe) ---
+  const btnReporte = document.getElementById("btnReporte");
+  if (btnReporte) {
+    btnReporte.addEventListener("click", () => {
+      window.location.href = "reportes.html";
+    });
+  }
 });
-
-
