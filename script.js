@@ -1,10 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const tipo = document.getElementById("tipo");
-  const categoria = document.getElementById("categoria");
   const form = document.getElementById("registroTecnico");
-  const otroContainer = document.getElementById("otroContainer");
-  const categoriaOtro = document.getElementById("categoria_otro");
 
+  // --- CLIENTES PREDEFINIDOS ---
+  const clientes = [
+    "Dacis",
+    "Bakertilly",
+    "Comextaa",
+    "Grupo Francisco",
+    "TAM",
+    "Pompa y Asociados",
+    "Inecex",
+    "Verum",
+    "GCB",
+    "Comisa",
+    "Sertal",
+    "Otro (escribir manualmente)"
+  ];
+
+  // --- CATEGORÍAS SEGÚN TIPO ---
   const categorias = {
     software: [
       "Office",
@@ -22,60 +35,85 @@ document.addEventListener("DOMContentLoaded", () => {
     ]
   };
 
-  function llenarCategorias(t) {
+  // --- ELEMENTOS DEL FORMULARIO ---
+  const clienteSelect = document.getElementById("cliente");
+  const clienteManual = document.getElementById("cliente_manual");
+  const tipo = document.getElementById("tipo");
+  const categoria = document.getElementById("categoria");
+  const otroContainer = document.getElementById("otroContainer");
+  const categoriaOtro = document.getElementById("categoria_otro");
+
+  // --- LLENAR CLIENTES ---
+  clientes.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    clienteSelect.appendChild(opt);
+  });
+
+  // --- Mostrar campo manual si elige "Otro" ---
+  clienteSelect.addEventListener("change", () => {
+    if (clienteSelect.value.includes("Otro")) {
+      clienteManual.classList.remove("hidden");
+      clienteManual.required = true;
+    } else {
+      clienteManual.classList.add("hidden");
+      clienteManual.required = false;
+      clienteManual.value = "";
+    }
+  });
+
+  // --- Llenar categorías ---
+  function llenarCategorias(tipoSeleccionado) {
     categoria.innerHTML = "";
-    categorias[t].forEach(c => {
+    categorias[tipoSeleccionado].forEach(c => {
       const opt = document.createElement("option");
       opt.value = c;
       opt.textContent = c;
       categoria.appendChild(opt);
     });
-    // si el primero es "Otros..." ocultar el campo hasta seleccionar
     verificarOtro();
   }
 
+  // --- Mostrar campo si selecciona "Otros" ---
   function verificarOtro() {
     if (categoria.value && categoria.value.toLowerCase().includes("otros")) {
       otroContainer.classList.remove("hidden");
       categoriaOtro.required = true;
     } else {
       otroContainer.classList.add("hidden");
-      if (categoriaOtro) categoriaOtro.required = false;
-      if (categoriaOtro) categoriaOtro.value = "";
+      categoriaOtro.required = false;
+      categoriaOtro.value = "";
     }
   }
 
-  // eventos
-  if (tipo) {
-    tipo.addEventListener("change", () => llenarCategorias(tipo.value));
-  }
-  if (categoria) {
-    categoria.addEventListener("change", verificarOtro);
-  }
+  tipo.addEventListener("change", () => llenarCategorias(tipo.value));
+  categoria.addEventListener("change", verificarOtro);
 
-  // inicializar
-  if (tipo) llenarCategorias(tipo.value || "software");
+  // Inicializar por defecto
+  llenarCategorias(tipo.value || "software");
 
-  // submit demo
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      // recolectar datos básicos para demo
-      const data = {
-        empresa: form.empresa?.value || "",
-        tipo: form.tipo?.value || "",
-        categoria: form.categoria?.value || "",
-        categoria_otro: form.categoria_otro?.value || "",
-        detalle: form.detalle?.value || ""
-      };
-      // mostrar confirmación visual (puedes reemplazar por envio XHR/PHP)
-      alert("Reporte guardado (modo demo):\n\n" +
-            "Empresa: " + data.empresa + "\n" +
-            "Tipo: " + data.tipo + "\n" +
-            "Categoría: " + (data.categoria_otro || data.categoria) + "\n\n" +
-            "Detalle: " + data.detalle.slice(0,120) + (data.detalle.length>120?"...":""));
-      form.reset();
-      llenarCategorias("software");
-    });
-  }
+  // --- Envío del formulario ---
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const data = {
+      cliente: clienteSelect.value.includes("Otro") ? clienteManual.value : clienteSelect.value,
+      tipo: tipo.value,
+      categoria: categoria.value,
+      categoria_otro: categoriaOtro.value,
+      titulo: document.getElementById("titulo").value,
+      detalles: document.getElementById("detalles").value,
+      firma: document.getElementById("firma").value,
+      fecha: new Date().toLocaleDateString()
+    };
+
+    // Guardar en localStorage temporal para pasarlo a reportes.html
+    localStorage.setItem("reporteData", JSON.stringify(data));
+
+    // Redirigir a reportes.html
+    window.location.href = "reportes.html";
+  });
 });
+
+
