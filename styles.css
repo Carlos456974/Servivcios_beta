@@ -19,17 +19,18 @@ body {
   align-items: center;     /* Centrado horizontal */
   text-align: center;
   padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .index-container img.logo {
-  width: 260px;
-  max-width: 75%;
+  width: clamp(200px, 40vw, 280px);
   height: auto;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .index-container h1 {
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
   color: #154C52;
   margin-bottom: 25px;
 }
@@ -42,7 +43,7 @@ body {
   border: none;
   border-radius: 10px;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 3vw, 1.1rem);
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -60,11 +61,12 @@ body {
   align-items: center; /* Centrado horizontal */
   padding: 40px 20px;
   background-color: #ffffff;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .registro-wrapper img {
-  width: 200px;
-  max-width: 80%;
+  width: clamp(180px, 40vw, 250px);
   height: auto;
   margin-bottom: 25px;
 }
@@ -75,7 +77,8 @@ body {
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 600px; /* Tamaño cómodo en pantallas grandes */
+  max-width: 600px;
+  transition: all 0.3s ease-in-out;
 }
 
 .registro-container h2 {
@@ -121,41 +124,49 @@ body {
 
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
+  .index-container {
+    padding: 10px;
+  }
+
   .index-container img.logo {
-    width: 220px;
+    width: clamp(180px, 50vw, 230px);
+    margin-bottom: 15px;
   }
 
   .btn-agregar {
-    padding: 12px 28px;
-    font-size: 1rem;
+    padding: 12px 25px;
+  }
+
+  .registro-wrapper {
+    padding: 20px 10px;
   }
 
   .registro-container {
+    max-width: 95%;
     padding: 35px 25px;
-    max-width: 92%;
   }
 
   .registro-wrapper img {
-    width: 180px;
+    width: clamp(160px, 45vw, 220px);
   }
 }
 
 @media (max-width: 480px) {
   .index-container img.logo {
-    width: 200px;
+    width: clamp(160px, 55vw, 210px);
   }
 
   .btn-agregar {
-    padding: 12px 25px;
-    font-size: 1rem;
+    width: 90%;
+    padding: 12px 18px;
+  }
+
+  .registro-wrapper img {
+    width: clamp(150px, 60vw, 200px);
   }
 
   .registro-container {
     padding: 30px 20px;
-    max-width: 95%;
-  }
-
-  .registro-wrapper img {
-    width: 160px;
+    max-width: 96%;
   }
 }
