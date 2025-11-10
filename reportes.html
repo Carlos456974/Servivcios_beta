@@ -5,56 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reporte de Servicio | SIICOM</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 40px;
+      text-align: center;
+    }
+    .reporte-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #154C52;
+      margin-bottom: 20px;
+    }
+    .campo {
+      text-align: left;
+      margin-bottom: 15px;
+    }
+    .campo strong {
+      color: #333;
+    }
+    .boton-volver {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #154C52;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .boton-volver:hover {
+      background-color: #0d3337;
+    }
+  </style>
 </head>
 <body>
-  <div class="reporte-wrapper">
-    <div id="reporte" class="reporte-container">
-      <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM" class="logo">
-      <h2>Reporte de Servicio</h2>
 
-      <p><strong>Fecha:</strong> <span id="fecha"></span></p>
-      <p><strong>Cliente:</strong> <span id="cliente"></span></p>
-      <p><strong>Tipo de servicio:</strong> <span id="tipo"></span></p>
-      <p><strong>Título del servicio:</strong> <span id="titulo"></span></p>
-
-      <h3>Detalles:</h3>
-      <p id="detalles"></p>
-
-      <div class="firma-section">
-        <p>______________________________________</p>
-        <p><strong><span id="firma"></span></strong></p>
-        <p>Firma de autorización</p>
-      </div>
-    </div>
-
-    <button id="descargarPDF" class="btn-agregar">Descargar PDF</button>
-    <a href="registro.html" class="btn-agregar" style="margin-top:10px;">Registrar otro servicio</a>
+  <div class="reporte-container">
+    <h2>Reporte de Servicio</h2>
+    <div id="reporteDatos"></div>
+    <a href="registro.html" class="boton-volver">Registrar otro servicio</a>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const data = JSON.parse(localStorage.getItem("servicioReporte"));
-      if (data) {
-        document.getElementById("fecha").textContent = data.fecha;
-        document.getElementById("cliente").textContent = data.cliente;
-        document.getElementById("tipo").textContent = data.tipo;
-        document.getElementById("titulo").textContent = data.titulo;
-        document.getElementById("detalles").textContent = data.detalles;
-        document.getElementById("firma").textContent = data.firma;
-      }
+      const reporteDiv = document.getElementById("reporteDatos");
 
-      document.getElementById("descargarPDF").addEventListener("click", () => {
-        const elemento = document.getElementById("reporte");
-        const opt = {
-          margin: 10,
-          filename: `Reporte_${data.cliente}_${data.fecha}.pdf`,
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().from(elemento).set(opt).save();
-      });
+      const data = JSON.parse(localStorage.getItem("reporteData"));
+
+      if (data) {
+        reporteDiv.innerHTML = `
+          <div class="campo"><strong>Cliente:</strong> ${data.cliente}</div>
+          <div class="campo"><strong>Tipo de servicio:</strong> ${data.tipo}</div>
+          <div class="campo"><strong>Título:</strong> ${data.titulo}</div>
+          <div class="campo"><strong>Detalles:</strong><br>${data.detalles}</div>
+          <div class="campo"><strong>Autorizó / Firma:</strong> ${data.firma}</div>
+          <div class="campo"><strong>Fecha:</strong> ${data.fecha}</div>
+        `;
+      } else {
+        reporteDiv.innerHTML = `
+          <p>No se encontraron datos del reporte.</p>
+          <a href="registro.html" class="boton-volver">Volver al registro</a>
+        `;
+      }
     });
   </script>
 </body>
