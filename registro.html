@@ -5,21 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro de Servicio | SIICOM</title>
   <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
   <div class="registro-wrapper">
     <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM">
     <div class="registro-container">
       <h2>Registrar Servicio Realizado</h2>
-      <form>
-        <label for="nombre">Nombre del Cliente</label>
-        <input type="text" id="nombre" name="nombre" required>
+      <form id="formServicio">
+        
+        <!-- CLIENTE -->
+        <label for="cliente">Cliente</label>
+        <select id="cliente" name="cliente" required>
+          <option value="">-- Selecciona un cliente --</option>
+          <option>Dacis</option>
+          <option>Bakertilly</option>
+          <option>Comextaa</option>
+          <option>Grupo Francisco</option>
+          <option>TAM</option>
+          <option>Pompa y asociados</option>
+          <option>Inecex</option>
+          <option>Verum</option>
+          <option>GCB</option>
+          <option>Comisa</option>
+          <option>Sertal</option>
+          <option value="otro">Otro (agregar manualmente)</option>
+        </select>
 
-        <label for="servicio">Servicio Realizado</label>
-        <input type="text" id="servicio" name="servicio" required>
+        <div id="otroClienteContainer" class="hidden">
+          <label for="otroCliente">Nombre del nuevo cliente</label>
+          <input type="text" id="otroCliente" name="otroCliente" placeholder="Escribe el nombre del cliente">
+        </div>
 
-        <label for="comentarios">Comentarios</label>
-        <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+        <!-- TIPO DE SERVICIO -->
+        <label for="tipo">Tipo de Servicio</label>
+        <select id="tipo" name="tipo" required>
+          <option value="">-- Selecciona el tipo --</option>
+          <option value="hardware">Hardware</option>
+          <option value="software">Software</option>
+        </select>
+
+        <!-- TÍTULO -->
+        <label for="titulo">Título del Servicio</label>
+        <input type="text" id="titulo" name="titulo" placeholder="Ej. Instalación de sistema o reparación de PC" required>
+
+        <!-- DETALLES -->
+        <label for="detalles">Detalles del Servicio</label>
+        <textarea id="detalles" name="detalles" rows="4" placeholder="Describe brevemente lo realizado" required></textarea>
+
+        <!-- FIRMA -->
+        <label for="firma">Nombre de quien autoriza / firma</label>
+        <input type="text" id="firma" name="firma" placeholder="Nombre de la persona que firmará" required>
 
         <button type="submit">Generar reporte</button>
       </form>
@@ -27,6 +63,3 @@
   </div>
 </body>
 </html>
-
-
-
