@@ -8,6 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* === INDEX === */
@@ -21,12 +22,13 @@ body {
   padding: 20px;
   min-height: 100vh;
   box-sizing: border-box;
+  background-color: #fdfdfd;
 }
 
 .index-container img.logo {
-  width: clamp(200px, 40vw, 280px);
+  width: clamp(220px, 45vw, 300px);
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .index-container h1 {
@@ -37,7 +39,7 @@ body {
 
 .btn-agregar {
   display: inline-block;
-  background-color: #154C52;
+  background-color: #1C6A71;
   color: white;
   padding: 14px 35px;
   border: none;
@@ -49,7 +51,7 @@ body {
 }
 
 .btn-agregar:hover {
-  background-color: #0f3a3d;
+  background-color: #145056;
 }
 
 /* === REGISTRO === */
@@ -66,25 +68,26 @@ body {
 }
 
 .registro-wrapper img {
-  width: clamp(180px, 40vw, 250px);
+  width: clamp(200px, 45vw, 280px);
   height: auto;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .registro-container {
-  background-color: #f9f9f9; /* Fondo suave para destacar */
-  padding: 45px 35px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  background-color: #f9f9f9;
+  padding: 55px 45px;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 600px;
+  max-width: 750px;
   transition: all 0.3s ease-in-out;
 }
 
 .registro-container h2 {
   color: #154C52;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  font-size: 1.6rem;
 }
 
 .registro-container label {
@@ -98,27 +101,108 @@ body {
 .registro-container textarea,
 .registro-container select {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
+  padding: 14px;
+  margin-bottom: 18px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
   box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.registro-container input:focus,
+.registro-container textarea:focus,
+.registro-container select:focus {
+  outline: none;
+  border-color: #154C52;
+}
+
+.registro-container textarea {
+  resize: none;
 }
 
 .registro-container button {
   width: 100%;
   background-color: #154C52;
   color: white;
-  padding: 14px;
+  padding: 16px;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .registro-container button:hover {
+  background-color: #0f3a3d;
+}
+
+/* === CAMPOS ADICIONALES === */
+.hidden {
+  display: none;
+}
+
+#otroContainer {
+  margin-top: -10px;
+}
+
+/* === REPORTE === */
+.reporte-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 50px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+.reporte-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.reporte-header img {
+  width: 180px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.reporte-header h2 {
+  color: #154C52;
+}
+
+.reporte-body p {
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.firma-section {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.firma-section hr {
+  width: 60%;
+  margin: 0 auto 8px;
+  border: 1px solid #000;
+}
+
+.download-btn {
+  display: block;
+  margin: 30px auto 0;
+  background-color: #154C52;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.1rem;
+  width: fit-content;
+  transition: background 0.3s ease;
+}
+
+.download-btn:hover {
   background-color: #0f3a3d;
 }
 
@@ -129,7 +213,7 @@ body {
   }
 
   .index-container img.logo {
-    width: clamp(180px, 50vw, 230px);
+    width: clamp(190px, 55vw, 240px);
     margin-bottom: 15px;
   }
 
@@ -143,17 +227,21 @@ body {
 
   .registro-container {
     max-width: 95%;
-    padding: 35px 25px;
+    padding: 40px 25px;
   }
 
   .registro-wrapper img {
-    width: clamp(160px, 45vw, 220px);
+    width: clamp(180px, 55vw, 240px);
+  }
+
+  .reporte-container {
+    padding: 35px 20px;
   }
 }
 
 @media (max-width: 480px) {
   .index-container img.logo {
-    width: clamp(160px, 55vw, 210px);
+    width: clamp(160px, 60vw, 210px);
   }
 
   .btn-agregar {
@@ -162,11 +250,17 @@ body {
   }
 
   .registro-wrapper img {
-    width: clamp(150px, 60vw, 200px);
+    width: clamp(160px, 65vw, 220px);
   }
 
   .registro-container {
-    padding: 30px 20px;
+    padding: 35px 22px;
     max-width: 96%;
   }
+
+  .reporte-container {
+    padding: 25px 15px;
+  }
 }
+
+
