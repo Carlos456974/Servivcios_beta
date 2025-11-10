@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Servicio | SIICOM</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="reporte-wrapper">
+    <div id="reporte" class="reporte-container">
+      <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM" class="logo">
+      <h2>Reporte de Servicio</h2>
+
+      <p><strong>Fecha:</strong> <span id="fecha"></span></p>
+      <p><strong>Cliente:</strong> <span id="cliente"></span></p>
+      <p><strong>Tipo de servicio:</strong> <span id="tipo"></span></p>
+      <p><strong>Título del servicio:</strong> <span id="titulo"></span></p>
+
+      <h3>Detalles:</h3>
+      <p id="detalles"></p>
+
+      <div class="firma-section">
+        <p>______________________________________</p>
+        <p><strong><span id="firma"></span></strong></p>
+        <p>Firma de autorización</p>
+      </div>
+    </div>
+
+    <button id="descargarPDF" class="btn-agregar">Descargar PDF</button>
+    <a href="registro.html" class="btn-agregar" style="margin-top:10px;">Registrar otro servicio</a>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const data = JSON.parse(localStorage.getItem("servicioReporte"));
+      if (data) {
+        document.getElementById("fecha").textContent = data.fecha;
+        document.getElementById("cliente").textContent = data.cliente;
+        document.getElementById("tipo").textContent = data.tipo;
+        document.getElementById("titulo").textContent = data.titulo;
+        document.getElementById("detalles").textContent = data.detalles;
+        document.getElementById("firma").textContent = data.firma;
+      }
+
+      document.getElementById("descargarPDF").addEventListener("click", () => {
+        const elemento = document.getElementById("reporte");
+        const opt = {
+          margin: 10,
+          filename: `Reporte_${data.cliente}_${data.fecha}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().from(elemento).set(opt).save();
+      });
+    });
+  </script>
+</body>
+</html>
