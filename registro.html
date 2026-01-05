@@ -8,12 +8,15 @@
   <script defer src="script.js"></script>
 </head>
 <body>
+
   <div class="registro-wrapper">
     <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM">
+
     <div class="registro-container">
       <h2>Registrar Servicio Realizado</h2>
+
       <form id="formServicio">
-        
+
         <!-- CLIENTE -->
         <label for="cliente">Cliente</label>
         <select id="cliente" name="cliente" required>
@@ -28,13 +31,13 @@
           <option>Verum</option>
           <option>GCB</option>
           <option>Comisa</option>
-          <option>Sertal</option>
           <option value="otro">Otro (agregar manualmente)</option>
         </select>
 
         <div id="otroClienteContainer" class="hidden">
           <label for="otroCliente">Nombre del nuevo cliente</label>
-          <input type="text" id="otroCliente" name="otroCliente" placeholder="Escribe el nombre del cliente">
+          <input type="text" id="otroCliente" name="otroCliente"
+                 placeholder="Escribe el nombre del cliente">
         </div>
 
         <!-- TIPO DE SERVICIO -->
@@ -44,23 +47,55 @@
           <option value="hardware">Hardware</option>
           <option value="software">Software</option>
           <option value="visita_general">Visita general</option>
+          <option value="recoleccion">Recolección de equipo</option>
         </select>
+
+        <!-- DATOS SOLO PARA RECOLECCIÓN -->
+        <div id="recoleccionContainer" class="hidden">
+
+          <label for="serie">N/S o Service Tag</label>
+          <input type="text" id="serie" name="serie"
+                 placeholder="Número de serie o Service Tag">
+
+          <label for="marcaModelo">Marca y modelo del equipo</label>
+          <input type="text" id="marcaModelo" name="marcaModelo"
+                 placeholder="Ej. Dell Latitude 5420">
+
+          <label>¿Incluye cargador?</label>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="cargador" value="si">
+              Sí
+            </label>
+            <label>
+              <input type="radio" name="cargador" value="no">
+              No
+            </label>
+          </div>
+
+        </div>
 
         <!-- TÍTULO -->
         <label for="titulo">Título del Servicio</label>
-        <input type="text" id="titulo" name="titulo" placeholder="Ej. Instalación de sistema o reparación de PC" required>
+        <input type="text" id="titulo" name="titulo"
+               placeholder="Ej. Instalación de sistema o reparación de PC" required>
 
         <!-- DETALLES -->
         <label for="detalles">Detalles del Servicio</label>
-        <textarea id="detalles" name="detalles" rows="4" placeholder="Describe brevemente lo realizado" required></textarea>
+        <textarea id="detalles" name="detalles" rows="4"
+                  placeholder="Describe brevemente lo realizado" required></textarea>
 
         <!-- FIRMA -->
         <label for="firma">Nombre de quien autoriza / firma</label>
-        <input type="text" id="firma" name="firma" placeholder="Nombre de la persona que firmará" required>
+        <input type="text" id="firma" name="firma"
+               placeholder="Nombre de la persona que firmará" required>
 
         <button type="submit">Generar reporte</button>
+
       </form>
     </div>
   </div>
+
 </body>
 </html>
+
