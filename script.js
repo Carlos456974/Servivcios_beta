@@ -76,9 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     localStorage.setItem("reporteData", JSON.stringify(data));
-    window.location.href = "reporte.html";
+    window.location.href = "reportes.html";
   });
 
 });
+
 
 
