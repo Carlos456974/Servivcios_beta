@@ -2,160 +2,153 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <title>Reporte de Servicio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reporte de Servicio | SIICOM</title>
-  <link rel="stylesheet" href="styles.css">
+
   <style>
     body {
-      font-family: "Arial", sans-serif;
-      background-color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
       margin: 0;
-      padding: 0;
+      padding: 20px;
+    }
+
+    .reporte {
+      max-width: 800px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-top: 0;
       text-align: center;
-    }
-
-    .reporte-hoja {
-      width: 210mm;
-      min-height: 297mm;
-      margin: 20px auto;
-      background: white;
-      padding: 40px 60px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.15);
-      box-sizing: border-box;
-      position: relative;
-    }
-
-    .logo {
-      width: 180px;
-      margin-bottom: 20px;
-    }
-
-    h2 {
       color: #154C52;
-      margin-bottom: 20px;
-      font-size: 24px;
-      border-bottom: 2px solid #154C52;
-      display: inline-block;
-      padding-bottom: 5px;
     }
 
     .campo {
-      text-align: left;
-      margin: 20px 0;
-      font-size: 16px;
-      line-height: 1.5;
+      margin-bottom: 15px;
     }
 
-    .campo strong {
-      display: inline-block;
-      width: 180px;
-      color: #000;
+    .campo label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
     }
 
-    .firma {
-      margin-top: 80px;
-      text-align: center;
-    }
-
-    .linea-firma {
-      width: 60%;
-      border-bottom: 1px solid #000;
-      margin: 0 auto 5px;
-      height: 30px;
-    }
-
-    .firma p {
-      margin-top: 5px;
-      font-size: 16px;
+    .campo .valor {
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 4px;
+      white-space: pre-wrap;
     }
 
     .acciones {
       text-align: center;
-      margin: 30px 0;
+      margin-top: 25px;
     }
 
-    .boton {
-      background-color: #154C52;
-      color: white;
+    button {
       padding: 10px 20px;
       border: none;
-      border-radius: 8px;
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s;
+      font-size: 14px;
     }
 
-    .boton:hover {
-      background-color: #0d3337;
+    .btn-print {
+      background: #154C52;
+      color: #fff;
+      margin-right: 10px;
+    }
+
+    .btn-back {
+      background: #777;
+      color: #fff;
     }
 
     @media print {
-      body {
-        background: white;
-      }
       .acciones {
         display: none;
-      }
-      .reporte-hoja {
-        box-shadow: none;
-        margin: 0;
-        width: auto;
-        min-height: auto;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="acciones">
-    <button class="boton" id="btnDescargar">Descargar PDF</button>
-    <a href="registro.html" class="boton">Registrar otro servicio</a>
-  </div>
+  <div class="reporte">
+    <h1>Reporte de Servicio</h1>
 
-  <div class="reporte-hoja" id="reporte">
-    <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM" class="logo">
-    <h2>Reporte de Servicio</h2>
+    <div class="campo">
+      <label>Cliente</label>
+      <div class="valor" id="rCliente"></div>
+    </div>
 
-    <div id="reporteDatos"></div>
+    <div class="campo">
+      <label>Tipo de Servicio</label>
+      <div class="valor" id="rTipo"></div>
+    </div>
 
-    <div class="firma">
-      <div class="linea-firma"></div>
-      <p>Firma de autorización</p>
+    <!-- Título del servicio (solo se muestra si existe) -->
+    <div class="campo" id="tituloContainer">
+      <label>Título del Servicio</label>
+      <div class="valor" id="rTitulo"></div>
+    </div>
+
+    <div class="campo">
+      <label>Detalles del Servicio</label>
+      <div class="valor" id="rDetalles"></div>
+    </div>
+
+    <div class="campo">
+      <label>Firma</label>
+      <div class="valor" id="rFirma"></div>
+    </div>
+
+    <div class="campo">
+      <label>Fecha</label>
+      <div class="valor" id="rFecha"></div>
+    </div>
+
+    <div class="acciones">
+      <button class="btn-print" onclick="window.print()">Imprimir</button>
+      <button class="btn-back" onclick="volver()">Regresar</button>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const reporteDiv = document.getElementById("reporteDatos");
       const data = JSON.parse(localStorage.getItem("reporteData"));
 
-      if (data) {
-        reporteDiv.innerHTML = `
-          <div class="campo"><strong>Cliente:</strong> ${data.cliente}</div>
-          <div class="campo"><strong>Tipo de servicio:</strong> ${data.tipo}</div>
-          <div class="campo"><strong>Título del servicio:</strong> ${data.titulo}</div>
-          <div class="campo"><strong>Detalles:</strong><br>${data.detalles}</div>
-          <div class="campo"><strong>Autorizó:</strong> ${data.firma}</div>
-          <div class="campo"><strong>Fecha:</strong> ${data.fecha}</div>
-        `;
-      } else {
-        reporteDiv.innerHTML = `<p>No se encontraron datos del reporte.</p>`;
+      if (!data) {
+        alert("No hay información de reporte para mostrar.");
+        window.location.href = "index.html";
+        return;
       }
 
-      // Generar PDF
-      document.getElementById("btnDescargar").addEventListener("click", () => {
-        const elemento = document.getElementById("reporte");
-        const opciones = {
-          margin:       10,
-          filename:     `Reporte_SIICOM_${data?.cliente || 'sin_cliente'}.pdf`,
-          image:        { type: 'jpeg', quality: 0.98 },
-          html2canvas:  { scale: 2 },
-          jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().set(opciones).from(elemento).save();
-      });
+      document.getElementById("rCliente").textContent = data.cliente || "—";
+      document.getElementById("rTipo").textContent = data.tipo || "—";
+      document.getElementById("rDetalles").textContent = data.detalles || "—";
+      document.getElementById("rFirma").textContent = data.firma || "—";
+      document.getElementById("rFecha").textContent = data.fecha || "—";
+
+      const tituloContainer = document.getElementById("tituloContainer");
+      const rTitulo = document.getElementById("rTitulo");
+
+      // Si el título viene vacío o no aplica, se oculta
+      if (!data.titulo || data.titulo.trim() === "") {
+        tituloContainer.style.display = "none";
+      } else {
+        rTitulo.textContent = data.titulo;
+      }
     });
+
+    function volver() {
+      window.history.back();
+    }
   </script>
 
 </body>
