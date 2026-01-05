@@ -2,23 +2,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.getElementById("formServicio");
 
-  // Cliente
   const clienteSelect = document.getElementById("cliente");
   const otroClienteContainer = document.getElementById("otroClienteContainer");
   const otroClienteInput = document.getElementById("otroCliente");
 
-  // Tipo de servicio
   const tipoServicio = document.getElementById("tipo");
   const recoleccionContainer = document.getElementById("recoleccionContainer");
 
-  // Campos de recolección
+  const tituloContainer = document.getElementById("tituloContainer");
+  const tituloInput = document.getElementById("titulo");
+
   const serieInput = document.getElementById("serie");
   const marcaModeloInput = document.getElementById("marcaModelo");
   const cargadorInputs = document.querySelectorAll('input[name="cargador"]');
 
-  /* ===============================
-     CLIENTE "OTRO"
-  =============================== */
   clienteSelect.addEventListener("change", () => {
     if (clienteSelect.value === "otro") {
       otroClienteContainer.classList.remove("hidden");
@@ -30,12 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ===============================
-     RECOLECCIÓN DE EQUIPO
-  =============================== */
   tipoServicio.addEventListener("change", () => {
     if (tipoServicio.value === "recoleccion") {
       recoleccionContainer.classList.remove("hidden");
+
+      tituloContainer.classList.add("hidden");
+      tituloInput.required = false;
+      tituloInput.value = "";
 
       serieInput.required = true;
       marcaModeloInput.required = true;
@@ -43,60 +41,42 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       recoleccionContainer.classList.add("hidden");
 
-      // Limpiar y quitar validación
-      serieInput.required = false;
+      tituloContainer.classList.remove("hidden");
+      tituloInput.required = true;
+
       serieInput.value = "";
-
-      marcaModeloInput.required = false;
       marcaModeloInput.value = "";
-
-      cargadorInputs.forEach(input => input.checked = false);
+      cargadorInputs.forEach(i => i.checked = false);
     }
   });
 
-  /* ===============================
-     ENVÍO DEL FORMULARIO
-  =============================== */
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    let cargadorValor = "";
-    cargadorInputs.forEach(input => {
-      if (input.checked) cargadorValor = input.value;
-    });
+    let cargador = "";
+    cargadorInputs.forEach(i => { if (i.checked) cargador = i.value; });
 
-    // Validación extra para recolección
-    if (tipoServicio.value === "recoleccion" && cargadorValor === "") {
+    if (tipoServicio.value === "recoleccion" && !cargador) {
       alert("Indica si el equipo incluye cargador.");
       return;
     }
 
     const data = {
-      cliente: clienteSelect.value === "otro"
-        ? otroClienteInput.value
-        : clienteSelect.value,
-
+      cliente: clienteSelect.value === "otro" ? otroClienteInput.value : clienteSelect.value,
       tipo: tipoServicio.value,
-      titulo: document.getElementById("titulo").value,
+      titulo: tituloInput.value || null,
       detalles: document.getElementById("detalles").value,
       firma: document.getElementById("firma").value,
       fecha: new Date().toLocaleDateString(),
-
-      // Datos extra solo si es recolección
-      recoleccion: tipoServicio.value === "recoleccion"
-        ? {
-            serie: serieInput.value,
-            marcaModelo: marcaModeloInput.value,
-            cargador: cargadorValor
-          }
-        : null
+      recoleccion: tipoServicio.value === "recoleccion" ? {
+        serie: serieInput.value,
+        marcaModelo: marcaModeloInput.value,
+        cargador
+      } : null
     };
 
-    // Guardar en localStorage
     localStorage.setItem("reporteData", JSON.stringify(data));
-
-    // Redirigir
-    window.location.href = "reportes.html";
+    window.location.href = "reporte.html";
   });
 
 });
