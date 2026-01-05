@@ -36,8 +36,7 @@
 
         <div id="otroClienteContainer" class="hidden">
           <label for="otroCliente">Nombre del nuevo cliente</label>
-          <input type="text" id="otroCliente" name="otroCliente"
-                 placeholder="Escribe el nombre del cliente">
+          <input type="text" id="otroCliente" name="otroCliente">
         </div>
 
         <!-- TIPO DE SERVICIO -->
@@ -50,45 +49,36 @@
           <option value="recoleccion">Recolección de equipo</option>
         </select>
 
-        <!-- DATOS SOLO PARA RECOLECCIÓN -->
+        <!-- DATOS DE RECOLECCIÓN -->
         <div id="recoleccionContainer" class="hidden">
 
           <label for="serie">N/S o Service Tag</label>
-          <input type="text" id="serie" name="serie"
-                 placeholder="Número de serie o Service Tag">
+          <input type="text" id="serie" name="serie">
 
           <label for="marcaModelo">Marca y modelo del equipo</label>
-          <input type="text" id="marcaModelo" name="marcaModelo"
-                 placeholder="Ej. Dell Latitude 5420">
+          <input type="text" id="marcaModelo" name="marcaModelo">
 
           <label>¿Incluye cargador?</label>
           <div class="radio-group">
-            <label>
-              <input type="radio" name="cargador" value="si">
-              Sí
-            </label>
-            <label>
-              <input type="radio" name="cargador" value="no">
-              No
-            </label>
+            <label><input type="radio" name="cargador" value="Sí"> Sí</label>
+            <label><input type="radio" name="cargador" value="No"> No</label>
           </div>
 
         </div>
 
-        <!-- TÍTULO -->
-        <label for="titulo">Título del Servicio</label>
-        <input type="text" id="titulo" name="titulo"
-               placeholder="Ej. Instalación de sistema o reparación de PC" required>
+        <!-- TÍTULO (SE OCULTA SOLO EN RECOLECCIÓN) -->
+        <div id="tituloContainer">
+          <label for="titulo">Título del Servicio</label>
+          <input type="text" id="titulo" name="titulo" required>
+        </div>
 
-        <!-- DETALLES -->
+        <!-- DETALLES (SIEMPRE VISIBLE) -->
         <label for="detalles">Detalles del Servicio</label>
-        <textarea id="detalles" name="detalles" rows="4"
-                  placeholder="Describe brevemente lo realizado" required></textarea>
+        <textarea id="detalles" name="detalles" rows="4" required></textarea>
 
         <!-- FIRMA -->
         <label for="firma">Nombre de quien autoriza / firma</label>
-        <input type="text" id="firma" name="firma"
-               placeholder="Nombre de la persona que firmará" required>
+        <input type="text" id="firma" name="firma" required>
 
         <button type="submit">Generar reporte</button>
 
