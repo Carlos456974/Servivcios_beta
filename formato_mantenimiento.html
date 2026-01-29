@@ -1,0 +1,126 @@
+<!-- Registro de Mantenimiento Individual - Flujo guiado -->
+<section id="registro-mantenimiento" class="container">
+  <div class="header"><img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM-MX" class="logo"><h2>Registro de Mantenimiento Individual</h2></div>
+
+  <form id="form-mantenimiento">
+
+    <!-- Paso 1: Datos generales -->
+    <fieldset>
+      <legend>Datos generales</legend>
+      <label>Empresa
+        <input type="text" name="empresa" required>
+      </label>
+      <label>Usuario
+        <input type="text" name="usuario" required>
+      </label>
+      <label>Fecha
+        <input type="text" name="fecha" id="fecha" readonly>
+      </label>
+    </fieldset>
+
+    <!-- Paso 2: Tipo de equipo -->
+    <fieldset>
+      <legend>Tipo de equipo</legend>
+      <div class="equipos">
+        <label>
+          <input type="radio" name="tipo_pc" value="PC Escritorio" required>
+          <img src="imagenes/PC_mant.png" alt="PC">
+          PC
+        </label>
+        <label>
+          <input type="radio" name="tipo_pc" value="Laptop">
+          <img src="imagenes/LAPTOP_mant.png" alt="Laptop">
+          Laptop
+        </label>
+        <label>
+          <input type="radio" name="tipo_pc" value="All in One">
+          <img src="imagenes/ONLY_mant.png" alt="All in One">
+          All in One
+        </label>
+      </div>
+
+      <label>Observaciones al recibir el equipo
+        <textarea name="observaciones" placeholder="Indique si el equipo presenta golpes, quebraduras, líneas en pantalla u otro daño visible"></textarea>
+      </label>
+    </fieldset>
+
+    <!-- Paso 3: Datos del equipo -->
+    <fieldset>
+      <legend>Datos del equipo</legend>
+      <label>Marca
+        <input type="text" name="marca" required>
+      </label>
+      <label>Modelo
+        <input type="text" name="modelo" required>
+      </label>
+      <label>Número de serie
+        <input type="text" name="serie" required>
+      </label>
+    </fieldset>
+
+    <!-- Paso 4: No-Break -->
+    <fieldset>
+      <legend>No-Break</legend>
+      <label><input type="radio" name="nobreak" value="Funcional" required> Funcional</label>
+      <label><input type="radio" name="nobreak" value="Tiene pero no funciona"> Tiene pero no funciona</label>
+      <label><input type="radio" name="nobreak" value="No tiene"> No tiene</label>
+    </fieldset>
+
+    <!-- Paso 5: Actividades realizadas -->
+    <fieldset>
+      <legend>Actividades realizadas en el mantenimiento</legend>
+      <p><strong>MANTENIMIENTO FÍSICO:</strong><br>
+      Mantenimiento programado (Limpieza de Monitor, Teclado, PC, Mouse)</p>
+
+      <p><strong>MANTENIMIENTO LÓGICO:</strong><br>
+      Mantenimiento programado (Limpieza de Archivos Temporales, Actualizaciones de Windows)</p>
+    </fieldset>
+
+    <!-- Paso 6: Técnico -->
+    <fieldset>
+      <legend>Personal que realizó el mantenimiento</legend>
+      <select name="tecnico" required>
+        <option value="">Seleccione</option>
+        <option>Carlos Dorantes</option>
+        <option>Mateo Peralta</option>
+        <option>Dylan Ruiz</option>
+      </select>
+    </fieldset>
+
+    <!-- Paso 7: Firmas -->
+    <fieldset>
+      <legend>Firmas</legend>
+      <div class="firmas">
+        <div>
+          <hr>
+          <p>Soporte Técnico</p>
+        </div>
+        <div>
+          <hr>
+          <p>Usuario / Encargado</p>
+        </div>
+      </div>
+    </fieldset>
+
+    <button type="submit">Generar formato</button>
+  </form>
+</section>
+
+<script>
+  // Fecha automática
+  document.getElementById('fecha').value = new Date().toLocaleDateString();
+</script>
+
+<style>
+#registro-mantenimiento { max-width: 900px; margin: auto; }
+.header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.logo { height: 60px; }
+fieldset { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; }
+legend { font-weight: bold; }
+.equipos { display: flex; gap: 1rem; }
+.equipos label { text-align: center; cursor: pointer; }
+.equipos img { width: 80px; display: block; margin: auto; }
+.firmas { display: flex; justify-content: space-between; margin-top: 2rem; }
+.firmas div { width: 40%; text-align: center; }
+button { padding: 0.6rem 1.2rem; }
+</style>
