@@ -112,15 +112,135 @@
 </script>
 
 <style>
-#registro-mantenimiento { max-width: 900px; margin: auto; }
-.header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+:root {
+  --primary:#154C52;
+  --secondary:#A6A33F;
+  --bg:#f4f7f8;
+  --border:#d0d7da;
+}
+
+body {
+  background: var(--bg);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#registro-mantenimiento {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
 .logo { height: 60px; }
-fieldset { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; }
-legend { font-weight: bold; }
-.equipos { display: flex; gap: 1rem; }
-.equipos label { text-align: center; cursor: pointer; }
-.equipos img { width: 80px; display: block; margin: auto; }
-.firmas { display: flex; justify-content: space-between; margin-top: 2rem; }
-.firmas div { width: 40%; text-align: center; }
-button { padding: 0.6rem 1.2rem; }
+
+h2 {
+  color: var(--primary);
+  margin: 0;
+}
+
+fieldset {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+legend {
+  padding: 0 .6rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+label {
+  display: block;
+  margin-bottom: .8rem;
+  font-size: .9rem;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: .6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  margin-top: .3rem;
+}
+
+textarea { resize: vertical; }
+
+.equipos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.equipos label {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.equipos input { display: none; }
+
+.equipos img {
+  width: 90px;
+  margin-bottom: .5rem;
+}
+
+.equipos label:hover {
+  border-color: var(--secondary);
+  background: #fafafa;
+}
+
+.equipos input:checked + img {
+  filter: drop-shadow(0 0 6px rgba(0,0,0,.3));
+}
+
+p { margin: .4rem 0; }
+
+.firmas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.firmas hr {
+  border: none;
+  border-top: 1px solid #000;
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: .8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background: #0f3b40;
+}
+
+@media print {
+  body { background: #fff; }
+  button { display: none; }
+  #registro-mantenimiento { box-shadow: none; margin: 0; }
+}
 </style>
