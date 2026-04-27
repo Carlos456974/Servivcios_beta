@@ -1,196 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Reporte de Servicio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Reporte</title>
 
-  <style>
-    body {
-      font-family: Arial;
-      background: #f4f6f8;
-      padding: 20px;
-    }
+<style>
+body {font-family: Arial; background:#f4f6f8;}
+.reporte {max-width:800px; margin:auto; background:#fff; padding:20px;}
+.campo {margin-bottom:15px;}
+.valor {background:#eee; padding:10px;}
 
-    .reporte {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 8px;
-    }
-
-    h1 {
-      text-align: center;
-      color: #154C52;
-    }
-
-    .campo {
-      margin-bottom: 15px;
-    }
-
-    .campo label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .valor {
-      background: #eee;
-      padding: 10px;
-      border-radius: 4px;
-    }
-
-    /* 🔵 BOTONES */
-    .acciones {
-      text-align: center;
-      margin-top: 25px;
-    }
-
-    .acciones button {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 5px;
-      background-color: #154C52;
-      color: white;
-      cursor: pointer;
-    }
-
-    .acciones button:hover {
-      background-color: #0f3a3d;
-    }
-
-    /* 🖨️ OCULTAR BOTONES AL IMPRIMIR */
-    @media print {
-      .acciones {
-        display: none;
-      }
-    }
-  </style>
+.acciones {text-align:center;}
+@media print {.acciones{display:none;}}
+</style>
 </head>
+
 <body>
 
 <div class="reporte">
-  <h1>Reporte de Servicio</h1>
 
-  <div class="campo">
-    <label>Cliente</label>
-    <div id="rCliente" class="valor"></div>
-  </div>
+<h1>Reporte</h1>
 
-  <div class="campo">
-    <label>Tipo</label>
-    <div id="rTipo" class="valor"></div>
-  </div>
+<div class="campo"><b>Cliente:</b><div id="rCliente" class="valor"></div></div>
+<div class="campo"><b>Tipo:</b><div id="rTipo" class="valor"></div></div>
 
-  <!-- 🔧 RECOLECCIÓN -->
-  <div id="recoleccionData" style="display:none;">
-    <div class="campo">
-      <label>N/S</label>
-      <div id="rSerie" class="valor"></div>
-    </div>
+<div id="recoleccionData" style="display:none;">
+  <div class="campo"><b>N/S:</b><div id="rSerie" class="valor"></div></div>
+  <div class="campo"><b>Marca:</b><div id="rMarca" class="valor"></div></div>
+</div>
 
-    <div class="campo">
-      <label>Marca/Modelo</label>
-      <div id="rMarcaModelo" class="valor"></div>
-    </div>
+<div id="ticketData" style="display:none;">
+  <div class="campo"><b>Ticket:</b><div id="rTicket" class="valor"></div></div>
+  <div class="campo"><b>Comentarios:</b><div id="rComentarios" class="valor"></div></div>
+</div>
 
-    <div class="campo">
-      <label>Cargador</label>
-      <div id="rCargador" class="valor"></div>
-    </div>
-  </div>
+<div id="tituloCampo" class="campo">
+  <b>Título:</b>
+  <div id="rTitulo" class="valor"></div>
+</div>
 
-  <!-- 🎫 TICKET -->
-  <div id="ticketData" style="display:none;">
-    <div class="campo">
-      <label>Número de ticket</label>
-      <div id="rNumeroTicket" class="valor"></div>
-    </div>
+<div id="detallesCampo" class="campo">
+  <b>Detalles:</b>
+  <div id="rDetalles" class="valor"></div>
+</div>
 
-    <div class="campo">
-      <label>Comentarios</label>
-      <div id="rComentariosTicket" class="valor"></div>
-    </div>
-  </div>
+<div class="campo"><b>Firma:</b><div id="rFirma" class="valor"></div></div>
+<div class="campo"><b>Fecha:</b><div id="rFecha" class="valor"></div></div>
 
-  <div class="campo" id="tituloContainer">
-    <label>Título</label>
-    <div id="rTitulo" class="valor"></div>
-  </div>
-
-  <div class="campo">
-    <label>Detalles</label>
-    <div id="rDetalles" class="valor"></div>
-  </div>
-
-  <div class="campo">
-    <label>Firma</label>
-    <div id="rFirma" class="valor"></div>
-  </div>
-
-  <div class="campo">
-    <label>Fecha</label>
-    <div id="rFecha" class="valor"></div>
-  </div>
-
-  <!-- 🔴 BOTONES (YA FUNCIONA IMPRIMIR) -->
-  <div class="acciones">
-    <button onclick="window.print()">Imprimir</button>
-    <button onclick="window.history.back()">Regresar</button>
-  </div>
+<div class="acciones">
+<button onclick="print()">Imprimir</button>
+</div>
 
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+const data = JSON.parse(localStorage.getItem("reporteData"));
 
-  const data = JSON.parse(localStorage.getItem("reporteData"));
+document.getElementById("rCliente").textContent = data.cliente;
+document.getElementById("rTipo").textContent = data.tipo;
+document.getElementById("rFirma").textContent = data.firma;
+document.getElementById("rFecha").textContent = data.fecha;
 
-  if (!data) {
-    alert("No hay datos para mostrar");
-    window.location.href = "index.html";
-    return;
-  }
+if(data.titulo){
+ document.getElementById("rTitulo").textContent = data.titulo;
+} else {
+ document.getElementById("tituloCampo").style.display="none";
+}
 
-  const tipos = {
-    hardware: "Hardware",
-    software: "Software",
-    visita_general: "Visita general",
-    recoleccion: "Recolección de equipo",
-    ticket: "Atención a ticket"
-  };
+if(data.detalles){
+ document.getElementById("rDetalles").textContent = data.detalles;
+}
 
-  document.getElementById("rCliente").textContent = data.cliente || "—";
-  document.getElementById("rTipo").textContent = tipos[data.tipo] || data.tipo;
-  document.getElementById("rDetalles").textContent = data.detalles || "—";
-  document.getElementById("rFirma").textContent = data.firma || "—";
-  document.getElementById("rFecha").textContent = data.fecha || "—";
+if(data.recoleccion){
+ document.getElementById("recoleccionData").style.display="block";
+ document.getElementById("rSerie").textContent = data.recoleccion.serie;
+ document.getElementById("rMarca").textContent = data.recoleccion.marca;
+}
 
-  // TÍTULO
-  if (!data.titulo || data.titulo.trim() === "") {
-    document.getElementById("tituloContainer").style.display = "none";
-  } else {
-    document.getElementById("rTitulo").textContent = data.titulo;
-  }
+if(data.ticket){
+ document.getElementById("ticketData").style.display="block";
+ document.getElementById("rTicket").textContent = data.ticket.numero;
+ document.getElementById("rComentarios").textContent = data.ticket.comentarios;
 
-  // RECOLECCIÓN
-  if (data.recoleccion) {
-    document.getElementById("recoleccionData").style.display = "block";
-    document.getElementById("rSerie").textContent = data.recoleccion.serie || "—";
-    document.getElementById("rMarcaModelo").textContent = data.recoleccion.marcaModelo || "—";
-    document.getElementById("rCargador").textContent = data.recoleccion.cargador || "—";
-  }
-
-  // TICKET
-  if (data.ticket) {
-    document.getElementById("ticketData").style.display = "block";
-    document.getElementById("rNumeroTicket").textContent = data.ticket.numero || "—";
-    document.getElementById("rComentariosTicket").textContent = data.ticket.comentarios || "—";
-  }
-
-});
+ document.getElementById("detallesCampo").style.display="none";
+}
 </script>
 
 </body>
