@@ -1,126 +1,82 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const form = document.getElementById("formServicio");
+  const tipo = document.getElementById("tipo");
 
-  const clienteSelect = document.getElementById("cliente");
-  const otroClienteContainer = document.getElementById("otroClienteContainer");
-  const otroClienteInput = document.getElementById("otroCliente");
-
-  clienteSelect.addEventListener("change", () => {
-    if (clienteSelect.value === "otro") {
-      otroClienteContainer.classList.remove("hidden");
-      otroClienteInput.required = true;
-    } else {
-      otroClienteContainer.classList.add("hidden");
-      otroClienteInput.required = false;
-      otroClienteInput.value = "";
-    }
-  });
-
-  const tipoServicio = document.getElementById("tipo");
-
-  const recoleccionContainer = document.getElementById("recoleccionContainer");
-  const ticketContainer = document.getElementById("ticketContainer");
+  const recoleccion = document.getElementById("recoleccionContainer");
+  const ticket = document.getElementById("ticketContainer");
 
   const tituloContainer = document.getElementById("tituloContainer");
-  const tituloInput = document.getElementById("titulo");
+  const detallesContainer = document.getElementById("detallesContainer");
 
-  const serieInput = document.getElementById("serie");
-  const marcaModeloInput = document.getElementById("marcaModelo");
+  const titulo = document.getElementById("titulo");
+  const detalles = document.getElementById("detalles");
 
-  const numeroTicketInput = document.getElementById("numeroTicket");
-  const comentariosTicketInput = document.getElementById("comentariosTicket");
+  const serie = document.getElementById("serie");
+  const marca = document.getElementById("marcaModelo");
 
-  const cargadorInputs = document.querySelectorAll('input[name="cargador"]');
+  const numeroTicket = document.getElementById("numeroTicket");
+  const comentariosTicket = document.getElementById("comentariosTicket");
 
-  tipoServicio.addEventListener("change", () => {
+  tipo.addEventListener("change", () => {
 
     // RESET
-    recoleccionContainer.classList.add("hidden");
-    ticketContainer.classList.add("hidden");
+    recoleccion.classList.add("hidden");
+    ticket.classList.add("hidden");
 
-    serieInput.required = false;
-    marcaModeloInput.required = false;
-    numeroTicketInput.required = false;
-    comentariosTicketInput.required = false;
-
-    serieInput.value = "";
-    marcaModeloInput.value = "";
-    numeroTicketInput.value = "";
-    comentariosTicketInput.value = "";
-
-    cargadorInputs.forEach(input => input.checked = false);
+    detallesContainer.classList.remove("hidden");
+    detalles.required = true;
 
     tituloContainer.classList.remove("hidden");
-    tituloInput.required = true;
+    titulo.required = true;
 
-    // RECOLECCIÓN
-    if (tipoServicio.value === "recoleccion") {
-
-      recoleccionContainer.classList.remove("hidden");
-
+    // RECOLECCION
+    if (tipo.value === "recoleccion") {
+      recoleccion.classList.remove("hidden");
       tituloContainer.classList.add("hidden");
-      tituloInput.required = false;
-      tituloInput.value = "";
-
-      serieInput.required = true;
-      marcaModeloInput.required = true;
+      titulo.required = false;
+      detalles.value = "";
     }
 
     // TICKET
-    if (tipoServicio.value === "ticket") {
+    if (tipo.value === "ticket") {
+      ticket.classList.remove("hidden");
 
-      ticketContainer.classList.remove("hidden");
-
-      numeroTicketInput.required = true;
-      comentariosTicketInput.required = true;
+      detallesContainer.classList.add("hidden");
+      detalles.required = false;
+      detalles.value = "";
     }
 
   });
 
-  form.addEventListener("submit", (e) => {
+  document.getElementById("formServicio").addEventListener("submit", e => {
     e.preventDefault();
 
-    let cargadorValor = "";
-    cargadorInputs.forEach(input => {
-      if (input.checked) cargadorValor = input.value;
-    });
-
-    if (tipoServicio.value === "recoleccion" && cargadorValor === "") {
-      alert("Indica si el equipo incluye cargador.");
-      return;
-    }
-
     const data = {
-      cliente: clienteSelect.value === "otro"
-        ? otroClienteInput.value
-        : clienteSelect.value,
-
-      tipo: tipoServicio.value,
-      titulo: tituloInput.value || null,
-      detalles: document.getElementById("detalles").value,
+      cliente: document.getElementById("cliente").value,
+      tipo: tipo.value,
+      titulo: titulo.value,
+      detalles: detalles.value,
       firma: document.getElementById("firma").value,
       fecha: new Date().toLocaleDateString(),
 
-      recoleccion: tipoServicio.value === "recoleccion"
+      recoleccion: tipo.value === "recoleccion"
         ? {
-            serie: serieInput.value,
-            marcaModelo: marcaModeloInput.value,
-            cargador: cargadorValor
+            serie: serie.value,
+            marca: marca.value
           }
         : null,
 
-      ticket: tipoServicio.value === "ticket"
+      ticket: tipo.value === "ticket"
         ? {
-            numero: numeroTicketInput.value,
-            comentarios: comentariosTicketInput.value
+            numero: numeroTicket.value,
+            comentarios: comentariosTicket.value
           }
         : null
     };
 
     localStorage.setItem("reporteData", JSON.stringify(data));
-
     window.location.href = "reportes.html";
+
   });
 
 });
