@@ -5,45 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const recoleccion = document.getElementById("recoleccionContainer");
   const ticket = document.getElementById("ticketContainer");
 
-  const tituloContainer = document.getElementById("tituloContainer");
   const detallesContainer = document.getElementById("detallesContainer");
-
-  const titulo = document.getElementById("titulo");
-  const detalles = document.getElementById("detalles");
-
-  const serie = document.getElementById("serie");
-  const marca = document.getElementById("marcaModelo");
-
-  const numeroTicket = document.getElementById("numeroTicket");
-  const comentariosTicket = document.getElementById("comentariosTicket");
 
   tipo.addEventListener("change", () => {
 
-    // RESET
     recoleccion.classList.add("hidden");
     ticket.classList.add("hidden");
-
     detallesContainer.classList.remove("hidden");
-    detalles.required = true;
 
-    tituloContainer.classList.remove("hidden");
-    titulo.required = true;
-
-    // RECOLECCION
     if (tipo.value === "recoleccion") {
       recoleccion.classList.remove("hidden");
-      tituloContainer.classList.add("hidden");
-      titulo.required = false;
-      detalles.value = "";
     }
 
-    // TICKET
     if (tipo.value === "ticket") {
       ticket.classList.remove("hidden");
-
       detallesContainer.classList.add("hidden");
-      detalles.required = false;
-      detalles.value = "";
     }
 
   });
@@ -54,22 +30,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = {
       cliente: document.getElementById("cliente").value,
       tipo: tipo.value,
-      titulo: titulo.value,
-      detalles: detalles.value,
+      titulo: document.getElementById("titulo").value,
+      detalles: document.getElementById("detalles").value,
       firma: document.getElementById("firma").value,
+      tecnico: document.getElementById("tecnico").value,
       fecha: new Date().toLocaleDateString(),
 
       recoleccion: tipo.value === "recoleccion"
         ? {
-            serie: serie.value,
-            marca: marca.value
+            serie: document.getElementById("serie").value,
+            marca: document.getElementById("marcaModelo").value
           }
         : null,
 
       ticket: tipo.value === "ticket"
         ? {
-            numero: numeroTicket.value,
-            comentarios: comentariosTicket.value
+            numero: document.getElementById("numeroTicket").value,
+            comentarios: document.getElementById("comentariosTicket").value
           }
         : null
     };
