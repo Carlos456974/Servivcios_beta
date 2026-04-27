@@ -92,7 +92,27 @@
       <div class="valor" id="rTipo"></div>
     </div>
 
-    <!-- Título del servicio (solo se muestra si existe) -->
+    <!-- 🔴 NUEVO: DATOS DE RECOLECCIÓN -->
+    <div id="recoleccionData" style="display:none;">
+
+      <div class="campo">
+        <label>N/S o Service Tag</label>
+        <div class="valor" id="rSerie"></div>
+      </div>
+
+      <div class="campo">
+        <label>Marca y modelo</label>
+        <div class="valor" id="rMarcaModelo"></div>
+      </div>
+
+      <div class="campo">
+        <label>¿Incluye cargador?</label>
+        <div class="valor" id="rCargador"></div>
+      </div>
+
+    </div>
+
+    <!-- TÍTULO -->
     <div class="campo" id="tituloContainer">
       <label>Título del Servicio</label>
       <div class="valor" id="rTitulo"></div>
@@ -129,20 +149,39 @@
         return;
       }
 
+      // ✔ Traducción de tipos
+      const tipos = {
+        hardware: "Hardware",
+        software: "Software",
+        visita_general: "Visita general",
+        recoleccion: "Recolección de equipo"
+      };
+
       document.getElementById("rCliente").textContent = data.cliente || "—";
-      document.getElementById("rTipo").textContent = data.tipo || "—";
+      document.getElementById("rTipo").textContent = tipos[data.tipo] || data.tipo;
       document.getElementById("rDetalles").textContent = data.detalles || "—";
       document.getElementById("rFirma").textContent = data.firma || "—";
       document.getElementById("rFecha").textContent = data.fecha || "—";
 
+      // ✔ TÍTULO
       const tituloContainer = document.getElementById("tituloContainer");
       const rTitulo = document.getElementById("rTitulo");
 
-      // Si el título viene vacío o no aplica, se oculta
       if (!data.titulo || data.titulo.trim() === "") {
         tituloContainer.style.display = "none";
       } else {
         rTitulo.textContent = data.titulo;
+      }
+
+      // 🔴 MOSTRAR RECOLECCIÓN
+      const recoleccionContainer = document.getElementById("recoleccionData");
+
+      if (data.recoleccion) {
+        recoleccionContainer.style.display = "block";
+
+        document.getElementById("rSerie").textContent = data.recoleccion.serie || "—";
+        document.getElementById("rMarcaModelo").textContent = data.recoleccion.marcaModelo || "—";
+        document.getElementById("rCargador").textContent = data.recoleccion.cargador || "—";
       }
     });
 
