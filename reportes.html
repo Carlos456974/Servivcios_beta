@@ -6,84 +6,101 @@
 
 <style>
 body {font-family: Arial; background:#f4f6f8;}
-.reporte {max-width:800px; margin:auto; background:#fff; padding:20px;}
-.campo {margin-bottom:15px;}
-.valor {background:#eee; padding:10px;}
 
-.acciones {text-align:center;}
+.hoja {
+  max-width:800px;
+  margin:30px auto;
+  background:#fff;
+  padding:25px;
+  page-break-after: always;
+}
+
+.valor {background:#eee; padding:8px; margin-bottom:10px;}
+
+.firma {margin-top:40px; text-align:center;}
+.firma hr {width:60%;}
+
 @media print {.acciones{display:none;}}
 </style>
 </head>
 
 <body>
 
-<div class="reporte">
+<!-- CLIENTE -->
+<div class="hoja">
+<h2>Reporte Cliente</h2>
+<div id="cContenido"></div>
 
-<h1>Reporte</h1>
-
-<div class="campo"><b>Cliente:</b><div id="rCliente" class="valor"></div></div>
-<div class="campo"><b>Tipo:</b><div id="rTipo" class="valor"></div></div>
-
-<div id="recoleccionData" style="display:none;">
-  <div class="campo"><b>N/S:</b><div id="rSerie" class="valor"></div></div>
-  <div class="campo"><b>Marca:</b><div id="rMarca" class="valor"></div></div>
+<div class="firma">
+<hr>
+<p id="cFirma"></p>
+<small>Firma cliente</small>
+</div>
 </div>
 
-<div id="ticketData" style="display:none;">
-  <div class="campo"><b>Ticket:</b><div id="rTicket" class="valor"></div></div>
-  <div class="campo"><b>Comentarios:</b><div id="rComentarios" class="valor"></div></div>
+<!-- INTERNO -->
+<div class="hoja">
+<h2>Reporte Interno</h2>
+<div id="iContenido"></div>
+
+<div class="firma">
+<hr>
+<p id="iFirma"></p>
+<small>Firma cliente</small>
 </div>
 
-<div id="tituloCampo" class="campo">
-  <b>Título:</b>
-  <div id="rTitulo" class="valor"></div>
+<div class="firma">
+<hr>
+<p id="iTecnico"></p>
+<small>Firma técnico</small>
 </div>
 
-<div id="detallesCampo" class="campo">
-  <b>Detalles:</b>
-  <div id="rDetalles" class="valor"></div>
 </div>
-
-<div class="campo"><b>Firma:</b><div id="rFirma" class="valor"></div></div>
-<div class="campo"><b>Fecha:</b><div id="rFecha" class="valor"></div></div>
 
 <div class="acciones">
-<button onclick="print()">Imprimir</button>
-</div>
-
+<button onclick="window.print()">Imprimir</button>
 </div>
 
 <script>
 const data = JSON.parse(localStorage.getItem("reporteData"));
 
-document.getElementById("rCliente").textContent = data.cliente;
-document.getElementById("rTipo").textContent = data.tipo;
-document.getElementById("rFirma").textContent = data.firma;
-document.getElementById("rFecha").textContent = data.fecha;
+function generarContenido() {
+  let html = `
+    <b>Cliente:</b><div class="valor">${data.cliente}</div>
+    <b>Tipo:</b><div class="valor">${data.tipo}</div>
+    <b>Fecha:</b><div class="valor">${data.fecha}</div>
+  `;
 
-if(data.titulo){
- document.getElementById("rTitulo").textContent = data.titulo;
-} else {
- document.getElementById("tituloCampo").style.display="none";
+  if(data.titulo){
+    html += `<b>Título:</b><div class="valor">${data.titulo}</div>`;
+  }
+
+  if(data.ticket){
+    html += `
+      <b>Ticket:</b><div class="valor">${data.ticket.numero}</div>
+      <b>Comentarios:</b><div class="valor">${data.ticket.comentarios}</div>
+    `;
+  } else if(data.detalles){
+    html += `<b>Detalles:</b><div class="valor">${data.detalles}</div>`;
+  }
+
+  if(data.recoleccion){
+    html += `
+      <b>N/S:</b><div class="valor">${data.recoleccion.serie}</div>
+      <b>Marca:</b><div class="valor">${data.recoleccion.marca}</div>
+    `;
+  }
+
+  return html;
 }
 
-if(data.detalles){
- document.getElementById("rDetalles").textContent = data.detalles;
-}
+document.getElementById("cContenido").innerHTML = generarContenido();
+document.getElementById("iContenido").innerHTML = generarContenido();
 
-if(data.recoleccion){
- document.getElementById("recoleccionData").style.display="block";
- document.getElementById("rSerie").textContent = data.recoleccion.serie;
- document.getElementById("rMarca").textContent = data.recoleccion.marca;
-}
+document.getElementById("cFirma").textContent = data.firma;
+document.getElementById("iFirma").textContent = data.firma;
+document.getElementById("iTecnico").textContent = data.tecnico;
 
-if(data.ticket){
- document.getElementById("ticketData").style.display="block";
- document.getElementById("rTicket").textContent = data.ticket.numero;
- document.getElementById("rComentarios").textContent = data.ticket.comentarios;
-
- document.getElementById("detallesCampo").style.display="none";
-}
 </script>
 
 </body>
