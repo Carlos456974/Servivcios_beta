@@ -17,46 +17,73 @@ body {font-family: Arial; background:#f4f6f8;}
 
 .valor {background:#eee; padding:8px; margin-bottom:10px;}
 
-.firma {margin-top:40px; text-align:center;}
-.firma hr {width:60%;}
+.firmas {
+  margin-top:50px;
+  display:flex;
+  justify-content:space-between;
+}
 
-@media print {.acciones{display:none;}}
+.firma {
+  width:45%;
+  text-align:center;
+}
+
+.firma hr {
+  margin-bottom:5px;
+}
+
+@media print {
+  .acciones {display:none;}
+}
 </style>
 </head>
 
 <body>
 
+<!-- 🟢 HOJA CLIENTE -->
 <div class="hoja">
 <h2>Reporte Cliente</h2>
 <div id="cContenido"></div>
 
-<div class="firma">
-<hr>
-<p id="cFirma"></p>
-<small>Firma cliente</small>
-</div>
+<div class="firmas">
+  <div class="firma">
+    <hr>
+    <p id="cFirma"></p>
+    <small>Firma del cliente</small>
+  </div>
+
+  <div class="firma">
+    <hr>
+    <p id="cTecnico"></p>
+    <small>Firma del personal</small>
+  </div>
 </div>
 
+</div>
+
+<!-- 🔵 HOJA INTERNA -->
 <div class="hoja">
 <h2>Reporte Interno</h2>
 <div id="iContenido"></div>
 
-<div class="firma">
-<hr>
-<p id="iFirma"></p>
-<small>Firma cliente</small>
-</div>
+<div class="firmas">
+  <div class="firma">
+    <hr>
+    <p id="iFirma"></p>
+    <small>Firma del cliente</small>
+  </div>
 
-<div class="firma">
-<hr>
-<p id="iTecnico"></p>
-<small>Firma técnico</small>
+  <div class="firma">
+    <hr>
+    <p id="iTecnico"></p>
+    <small>Firma del personal</small>
+  </div>
 </div>
 
 </div>
 
 <div class="acciones">
-<button onclick="window.print()">Imprimir</button>
+  <button onclick="window.print()">Imprimir</button>
 </div>
 
 <script>
@@ -90,11 +117,15 @@ function contenido(){
  return html;
 }
 
+// CONTENIDO
 document.getElementById("cContenido").innerHTML = contenido();
 document.getElementById("iContenido").innerHTML = contenido();
 
+// FIRMAS
 document.getElementById("cFirma").textContent = data.firma;
 document.getElementById("iFirma").textContent = data.firma;
+
+document.getElementById("cTecnico").textContent = data.tecnico;
 document.getElementById("iTecnico").textContent = data.tecnico;
 </script>
 
