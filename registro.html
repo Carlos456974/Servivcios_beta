@@ -31,18 +31,18 @@
           <option>Verum</option>
           <option>GCB</option>
           <option>Comisa</option>
-          <option value="otro">Otro (agregar manualmente)</option>
+          <option value="otro">Otro</option>
         </select>
 
         <div id="otroClienteContainer" class="hidden">
-          <label for="otroCliente">Nombre del nuevo cliente</label>
-          <input type="text" id="otroCliente" name="otroCliente">
+          <label>Nuevo cliente</label>
+          <input type="text" id="otroCliente">
         </div>
 
-        <!-- TIPO DE SERVICIO -->
-        <label for="tipo">Tipo de Servicio</label>
-        <select id="tipo" name="tipo" required>
-          <option value="">-- Selecciona el tipo --</option>
+        <!-- TIPO -->
+        <label>Tipo</label>
+        <select id="tipo" required>
+          <option value="">-- Selecciona --</option>
           <option value="hardware">Hardware</option>
           <option value="software">Software</option>
           <option value="visita_general">Visita general</option>
@@ -52,48 +52,43 @@
 
         <!-- RECOLECCIÓN -->
         <div id="recoleccionContainer" class="hidden">
+          <label>N/S</label>
+          <input type="text" id="serie">
 
-          <label for="serie">N/S o Service Tag</label>
-          <input type="text" id="serie" name="serie">
+          <label>Marca/Modelo</label>
+          <input type="text" id="marcaModelo">
 
-          <label for="marcaModelo">Marca y modelo del equipo</label>
-          <input type="text" id="marcaModelo" name="marcaModelo">
-
-          <label>¿Incluye cargador?</label>
-          <div class="radio-group">
-            <label><input type="radio" name="cargador" value="Sí"> Sí</label>
-            <label><input type="radio" name="cargador" value="No"> No</label>
-          </div>
-
+          <label>Cargador</label>
+          <input type="radio" name="cargador" value="Sí"> Sí
+          <input type="radio" name="cargador" value="No"> No
         </div>
 
         <!-- TICKET -->
         <div id="ticketContainer" class="hidden">
+          <label>No. Ticket</label>
+          <input type="text" id="numeroTicket">
 
-          <label for="numeroTicket">Número de ticket</label>
-          <input type="text" id="numeroTicket" name="numeroTicket">
-
-          <label for="comentariosTicket">Comentarios del ticket</label>
-          <textarea id="comentariosTicket" name="comentariosTicket" rows="3"></textarea>
-
+          <label>Comentarios</label>
+          <textarea id="comentariosTicket"></textarea>
         </div>
 
-        <!-- TÍTULO -->
+        <!-- TITULO -->
         <div id="tituloContainer">
-          <label for="titulo">Título del Servicio</label>
-          <input type="text" id="titulo" name="titulo" required>
+          <label>Título</label>
+          <input type="text" id="titulo" required>
         </div>
 
         <!-- DETALLES -->
-        <label for="detalles">Detalles del Servicio</label>
-        <textarea id="detalles" name="detalles" rows="4" required></textarea>
+        <div id="detallesContainer">
+          <label>Detalles</label>
+          <textarea id="detalles" required></textarea>
+        </div>
 
         <!-- FIRMA -->
-        <label for="firma">
-          Nombre de quien autoriza / firma 
-          <small>(debe ser la misma persona que solicitó el ticket o un encargado que lo valide)</small>
+        <label>
+          Firma (debe ser quien solicitó o valide)
         </label>
-        <input type="text" id="firma" name="firma" required>
+        <input type="text" id="firma" required>
 
         <button type="submit">Generar reporte</button>
 
