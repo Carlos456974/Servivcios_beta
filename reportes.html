@@ -20,12 +20,19 @@
       border-radius: 8px;
     }
 
+    h1 {
+      text-align: center;
+      color: #154C52;
+    }
+
     .campo {
       margin-bottom: 15px;
     }
 
     .campo label {
       font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
     }
 
     .valor {
@@ -34,9 +41,31 @@
       border-radius: 4px;
     }
 
+    /* 🔵 BOTONES */
     .acciones {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 25px;
+    }
+
+    .acciones button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #154C52;
+      color: white;
+      cursor: pointer;
+    }
+
+    .acciones button:hover {
+      background-color: #0f3a3d;
+    }
+
+    /* 🖨️ OCULTAR BOTONES AL IMPRIMIR */
+    @media print {
+      .acciones {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -45,20 +74,45 @@
 <div class="reporte">
   <h1>Reporte de Servicio</h1>
 
-  <div class="campo"><label>Cliente</label><div id="rCliente" class="valor"></div></div>
-  <div class="campo"><label>Tipo</label><div id="rTipo" class="valor"></div></div>
-
-  <!-- RECOLECCIÓN -->
-  <div id="recoleccionData" style="display:none;">
-    <div class="campo"><label>N/S</label><div id="rSerie" class="valor"></div></div>
-    <div class="campo"><label>Marca/Modelo</label><div id="rMarcaModelo" class="valor"></div></div>
-    <div class="campo"><label>Cargador</label><div id="rCargador" class="valor"></div></div>
+  <div class="campo">
+    <label>Cliente</label>
+    <div id="rCliente" class="valor"></div>
   </div>
 
-  <!-- TICKET -->
+  <div class="campo">
+    <label>Tipo</label>
+    <div id="rTipo" class="valor"></div>
+  </div>
+
+  <!-- 🔧 RECOLECCIÓN -->
+  <div id="recoleccionData" style="display:none;">
+    <div class="campo">
+      <label>N/S</label>
+      <div id="rSerie" class="valor"></div>
+    </div>
+
+    <div class="campo">
+      <label>Marca/Modelo</label>
+      <div id="rMarcaModelo" class="valor"></div>
+    </div>
+
+    <div class="campo">
+      <label>Cargador</label>
+      <div id="rCargador" class="valor"></div>
+    </div>
+  </div>
+
+  <!-- 🎫 TICKET -->
   <div id="ticketData" style="display:none;">
-    <div class="campo"><label>No. Ticket</label><div id="rNumeroTicket" class="valor"></div></div>
-    <div class="campo"><label>Comentarios</label><div id="rComentariosTicket" class="valor"></div></div>
+    <div class="campo">
+      <label>Número de ticket</label>
+      <div id="rNumeroTicket" class="valor"></div>
+    </div>
+
+    <div class="campo">
+      <label>Comentarios</label>
+      <div id="rComentariosTicket" class="valor"></div>
+    </div>
   </div>
 
   <div class="campo" id="tituloContainer">
@@ -66,9 +120,26 @@
     <div id="rTitulo" class="valor"></div>
   </div>
 
-  <div class="campo"><label>Detalles</label><div id="rDetalles" class="valor"></div></div>
-  <div class="campo"><label>Firma</label><div id="rFirma" class="valor"></div></div>
-  <div class="campo"><label>Fecha</label><div id="rFecha" class="valor"></div></div>
+  <div class="campo">
+    <label>Detalles</label>
+    <div id="rDetalles" class="valor"></div>
+  </div>
+
+  <div class="campo">
+    <label>Firma</label>
+    <div id="rFirma" class="valor"></div>
+  </div>
+
+  <div class="campo">
+    <label>Fecha</label>
+    <div id="rFecha" class="valor"></div>
+  </div>
+
+  <!-- 🔴 BOTONES (YA FUNCIONA IMPRIMIR) -->
+  <div class="acciones">
+    <button onclick="window.print()">Imprimir</button>
+    <button onclick="window.history.back()">Regresar</button>
+  </div>
 
 </div>
 
@@ -76,6 +147,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const data = JSON.parse(localStorage.getItem("reporteData"));
+
+  if (!data) {
+    alert("No hay datos para mostrar");
+    window.location.href = "index.html";
+    return;
+  }
 
   const tipos = {
     hardware: "Hardware",
@@ -85,30 +162,32 @@ document.addEventListener("DOMContentLoaded", () => {
     ticket: "Atención a ticket"
   };
 
-  document.getElementById("rCliente").textContent = data.cliente;
-  document.getElementById("rTipo").textContent = tipos[data.tipo];
+  document.getElementById("rCliente").textContent = data.cliente || "—";
+  document.getElementById("rTipo").textContent = tipos[data.tipo] || data.tipo;
+  document.getElementById("rDetalles").textContent = data.detalles || "—";
+  document.getElementById("rFirma").textContent = data.firma || "—";
+  document.getElementById("rFecha").textContent = data.fecha || "—";
 
-  document.getElementById("rDetalles").textContent = data.detalles;
-  document.getElementById("rFirma").textContent = data.firma;
-  document.getElementById("rFecha").textContent = data.fecha;
-
-  if (!data.titulo) {
+  // TÍTULO
+  if (!data.titulo || data.titulo.trim() === "") {
     document.getElementById("tituloContainer").style.display = "none";
   } else {
     document.getElementById("rTitulo").textContent = data.titulo;
   }
 
+  // RECOLECCIÓN
   if (data.recoleccion) {
     document.getElementById("recoleccionData").style.display = "block";
-    document.getElementById("rSerie").textContent = data.recoleccion.serie;
-    document.getElementById("rMarcaModelo").textContent = data.recoleccion.marcaModelo;
-    document.getElementById("rCargador").textContent = data.recoleccion.cargador;
+    document.getElementById("rSerie").textContent = data.recoleccion.serie || "—";
+    document.getElementById("rMarcaModelo").textContent = data.recoleccion.marcaModelo || "—";
+    document.getElementById("rCargador").textContent = data.recoleccion.cargador || "—";
   }
 
+  // TICKET
   if (data.ticket) {
     document.getElementById("ticketData").style.display = "block";
-    document.getElementById("rNumeroTicket").textContent = data.ticket.numero;
-    document.getElementById("rComentariosTicket").textContent = data.ticket.comentarios;
+    document.getElementById("rNumeroTicket").textContent = data.ticket.numero || "—";
+    document.getElementById("rComentariosTicket").textContent = data.ticket.comentarios || "—";
   }
 
 });
