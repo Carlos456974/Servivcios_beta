@@ -26,7 +26,6 @@ body {font-family: Arial; background:#f4f6f8;}
 
 <body>
 
-<!-- CLIENTE -->
 <div class="hoja">
 <h2>Reporte Cliente</h2>
 <div id="cContenido"></div>
@@ -38,7 +37,6 @@ body {font-family: Arial; background:#f4f6f8;}
 </div>
 </div>
 
-<!-- INTERNO -->
 <div class="hoja">
 <h2>Reporte Interno</h2>
 <div id="iContenido"></div>
@@ -64,43 +62,40 @@ body {font-family: Arial; background:#f4f6f8;}
 <script>
 const data = JSON.parse(localStorage.getItem("reporteData"));
 
-function generarContenido() {
-  let html = `
-    <b>Cliente:</b><div class="valor">${data.cliente}</div>
-    <b>Tipo:</b><div class="valor">${data.tipo}</div>
-    <b>Fecha:</b><div class="valor">${data.fecha}</div>
-  `;
+function contenido(){
+ let html = `
+ <b>Cliente:</b><div class="valor">${data.cliente}</div>
+ <b>Tipo:</b><div class="valor">${data.tipo}</div>
+ <b>Fecha:</b><div class="valor">${data.fecha}</div>
+ `;
 
-  if(data.titulo){
-    html += `<b>Título:</b><div class="valor">${data.titulo}</div>`;
-  }
+ if(data.titulo){
+  html += `<b>Título:</b><div class="valor">${data.titulo}</div>`;
+ }
 
-  if(data.ticket){
-    html += `
-      <b>Ticket:</b><div class="valor">${data.ticket.numero}</div>
-      <b>Comentarios:</b><div class="valor">${data.ticket.comentarios}</div>
-    `;
-  } else if(data.detalles){
-    html += `<b>Detalles:</b><div class="valor">${data.detalles}</div>`;
-  }
+ if(data.ticket){
+  html += `
+  <b>Ticket:</b><div class="valor">${data.ticket.numero}</div>
+  <b>Comentarios:</b><div class="valor">${data.ticket.comentarios}</div>`;
+ } else if(data.detalles){
+  html += `<b>Detalles:</b><div class="valor">${data.detalles}</div>`;
+ }
 
-  if(data.recoleccion){
-    html += `
-      <b>N/S:</b><div class="valor">${data.recoleccion.serie}</div>
-      <b>Marca:</b><div class="valor">${data.recoleccion.marca}</div>
-    `;
-  }
+ if(data.recoleccion){
+  html += `
+  <b>N/S:</b><div class="valor">${data.recoleccion.serie}</div>
+  <b>Marca:</b><div class="valor">${data.recoleccion.marca}</div>`;
+ }
 
-  return html;
+ return html;
 }
 
-document.getElementById("cContenido").innerHTML = generarContenido();
-document.getElementById("iContenido").innerHTML = generarContenido();
+document.getElementById("cContenido").innerHTML = contenido();
+document.getElementById("iContenido").innerHTML = contenido();
 
 document.getElementById("cFirma").textContent = data.firma;
 document.getElementById("iFirma").textContent = data.firma;
 document.getElementById("iTecnico").textContent = data.tecnico;
-
 </script>
 
 </body>
