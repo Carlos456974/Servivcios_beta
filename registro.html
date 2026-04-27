@@ -9,92 +9,76 @@
 </head>
 <body>
 
-  <div class="registro-wrapper">
-    <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM">
+<div class="registro-wrapper">
+  <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM">
 
-    <div class="registro-container">
-      <h2>Registrar Servicio Realizado</h2>
+  <div class="registro-container">
+    <h2>Registrar Servicio</h2>
 
-      <form id="formServicio">
+    <form id="formServicio">
 
-        <!-- CLIENTE -->
-        <label for="cliente">Cliente</label>
-        <select id="cliente" name="cliente" required>
-          <option value="">-- Selecciona un cliente --</option>
-          <option>Dacis</option>
-          <option>Bakertilly</option>
-          <option>Comextaa</option>
-          <option>Grupo Francisco</option>
-          <option>TAM</option>
-          <option>Pompa y asociados</option>
-          <option>Inecex</option>
-          <option>Verum</option>
-          <option>GCB</option>
-          <option>Comisa</option>
-          <option value="otro">Otro</option>
-        </select>
+      <!-- CLIENTE -->
+      <label>Cliente</label>
+      <select id="cliente" required>
+        <option value="">-- Selecciona --</option>
+        <option>GCB</option>
+        <option>Comisa</option>
+        <option value="otro">Otro</option>
+      </select>
 
-        <div id="otroClienteContainer" class="hidden">
-          <label>Nuevo cliente</label>
-          <input type="text" id="otroCliente">
-        </div>
+      <div id="otroClienteContainer" class="hidden">
+        <input type="text" id="otroCliente" placeholder="Nuevo cliente">
+      </div>
 
-        <!-- TIPO -->
-        <label>Tipo</label>
-        <select id="tipo" required>
-          <option value="">-- Selecciona --</option>
-          <option value="hardware">Hardware</option>
-          <option value="software">Software</option>
-          <option value="visita_general">Visita general</option>
-          <option value="recoleccion">Recolección de equipo</option>
-          <option value="ticket">Atención a ticket</option>
-        </select>
+      <!-- TIPO -->
+      <label>Tipo</label>
+      <select id="tipo" required>
+        <option value="">-- Selecciona --</option>
+        <option value="hardware">Hardware</option>
+        <option value="software">Software</option>
+        <option value="visita_general">Visita</option>
+        <option value="recoleccion">Recolección</option>
+        <option value="ticket">Atención a ticket</option>
+      </select>
 
-        <!-- RECOLECCIÓN -->
-        <div id="recoleccionContainer" class="hidden">
-          <label>N/S</label>
-          <input type="text" id="serie">
+      <!-- RECOLECCION -->
+      <div id="recoleccionContainer" class="hidden">
+        <input id="serie" placeholder="N/S">
+        <input id="marcaModelo" placeholder="Marca/Modelo">
+      </div>
 
-          <label>Marca/Modelo</label>
-          <input type="text" id="marcaModelo">
+      <!-- TICKET -->
+      <div id="ticketContainer" class="hidden">
+        <input id="numeroTicket" placeholder="No. Ticket">
+        <textarea id="comentariosTicket" placeholder="Comentarios"></textarea>
+      </div>
 
-          <label>Cargador</label>
-          <input type="radio" name="cargador" value="Sí"> Sí
-          <input type="radio" name="cargador" value="No"> No
-        </div>
+      <!-- TITULO -->
+      <div id="tituloContainer">
+        <input id="titulo" placeholder="Título">
+      </div>
 
-        <!-- TICKET -->
-        <div id="ticketContainer" class="hidden">
-          <label>No. Ticket</label>
-          <input type="text" id="numeroTicket">
+      <!-- DETALLES -->
+      <div id="detallesContainer">
+        <textarea id="detalles" placeholder="Detalles"></textarea>
+      </div>
 
-          <label>Comentarios</label>
-          <textarea id="comentariosTicket"></textarea>
-        </div>
+      <!-- FIRMA CLIENTE -->
+      <input id="firma" placeholder="Firma cliente" required>
 
-        <!-- TITULO -->
-        <div id="tituloContainer">
-          <label>Título</label>
-          <input type="text" id="titulo" required>
-        </div>
+      <!-- PERSONAL -->
+      <label>Personal que atendió</label>
+      <select id="tecnico" required>
+        <option value="">-- Selecciona --</option>
+        <option>Dylan (Auxiliar)</option>
+        <option>Carlos Dorantes (Encargado de TI)</option>
+      </select>
 
-        <!-- DETALLES -->
-        <div id="detallesContainer">
-          <label>Detalles</label>
-          <textarea id="detalles" required></textarea>
-        </div>
+      <button type="submit">Generar</button>
 
-        <!-- FIRMA -->
-        <label>
-          Firma (debe ser quien solicitó o valide)
-        </label>
-        <input type="text" id="firma" required>
-
-        <button type="submit">Generar reporte</button>
-
-      </form>
-    </div>
+    </form>
   </div>
+</div>
 
 </body>
 </html>
