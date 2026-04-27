@@ -10,7 +10,7 @@
 <body>
 
 <div class="registro-wrapper">
-  <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM">
+  <img src="imagenes/Logo SIICOM-MX (1).png">
 
   <div class="registro-container">
     <h2>Registrar Servicio</h2>
@@ -20,14 +20,22 @@
       <!-- CLIENTE -->
       <label>Cliente</label>
       <select id="cliente" required>
-        <option value="">-- Selecciona --</option>
+        <option value="">-- Selecciona un cliente --</option>
+        <option>Dacis</option>
+        <option>Bakertilly</option>
+        <option>Comextaa</option>
+        <option>Grupo Francisco</option>
+        <option>TAM</option>
+        <option>Pompa y asociados</option>
+        <option>Inecex</option>
+        <option>Verum</option>
         <option>GCB</option>
         <option>Comisa</option>
-        <option value="otro">Otro</option>
+        <option value="otro">Otro (agregar manualmente)</option>
       </select>
 
       <div id="otroClienteContainer" class="hidden">
-        <input type="text" id="otroCliente" placeholder="Nuevo cliente">
+        <input type="text" id="otroCliente" placeholder="Nombre del cliente">
       </div>
 
       <!-- TIPO -->
@@ -36,7 +44,7 @@
         <option value="">-- Selecciona --</option>
         <option value="hardware">Hardware</option>
         <option value="software">Software</option>
-        <option value="visita_general">Visita</option>
+        <option value="visita_general">Visita general</option>
         <option value="recoleccion">Recolección</option>
         <option value="ticket">Atención a ticket</option>
       </select>
@@ -63,10 +71,10 @@
         <textarea id="detalles" placeholder="Detalles"></textarea>
       </div>
 
-      <!-- FIRMA CLIENTE -->
+      <!-- FIRMA -->
       <input id="firma" placeholder="Firma cliente" required>
 
-      <!-- PERSONAL -->
+      <!-- TECNICO -->
       <label>Personal que atendió</label>
       <select id="tecnico" required>
         <option value="">-- Selecciona --</option>
@@ -74,7 +82,7 @@
         <option>Carlos Dorantes (Encargado de TI)</option>
       </select>
 
-      <button type="submit">Generar</button>
+      <button type="submit">Generar reporte</button>
 
     </form>
   </div>
