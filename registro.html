@@ -47,9 +47,10 @@
           <option value="software">Software</option>
           <option value="visita_general">Visita general</option>
           <option value="recoleccion">Recolección de equipo</option>
+          <option value="ticket">Atención a ticket</option>
         </select>
 
-        <!-- DATOS DE RECOLECCIÓN -->
+        <!-- RECOLECCIÓN -->
         <div id="recoleccionContainer" class="hidden">
 
           <label for="serie">N/S o Service Tag</label>
@@ -66,18 +67,32 @@
 
         </div>
 
-        <!-- TÍTULO (SE OCULTA SOLO EN RECOLECCIÓN) -->
+        <!-- TICKET -->
+        <div id="ticketContainer" class="hidden">
+
+          <label for="numeroTicket">Número de ticket</label>
+          <input type="text" id="numeroTicket" name="numeroTicket">
+
+          <label for="comentariosTicket">Comentarios del ticket</label>
+          <textarea id="comentariosTicket" name="comentariosTicket" rows="3"></textarea>
+
+        </div>
+
+        <!-- TÍTULO -->
         <div id="tituloContainer">
           <label for="titulo">Título del Servicio</label>
           <input type="text" id="titulo" name="titulo" required>
         </div>
 
-        <!-- DETALLES (SIEMPRE VISIBLE) -->
+        <!-- DETALLES -->
         <label for="detalles">Detalles del Servicio</label>
         <textarea id="detalles" name="detalles" rows="4" required></textarea>
 
         <!-- FIRMA -->
-        <label for="firma">Nombre de quien autoriza / firma</label>
+        <label for="firma">
+          Nombre de quien autoriza / firma 
+          <small>(debe ser la misma persona que solicitó el ticket o un encargado que lo valide)</small>
+        </label>
         <input type="text" id="firma" name="firma" required>
 
         <button type="submit">Generar reporte</button>
@@ -88,4 +103,3 @@
 
 </body>
 </html>
-
