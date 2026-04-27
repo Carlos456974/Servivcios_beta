@@ -2,104 +2,117 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <title>Reporte de Servicio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro de Servicio | SIICOM</title>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      padding: 20px;
+    }
+
+    .reporte {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+    }
+
+    .campo {
+      margin-bottom: 15px;
+    }
+
+    .campo label {
+      font-weight: bold;
+    }
+
+    .valor {
+      background: #eee;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .acciones {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="registro-wrapper">
-    <img src="imagenes/Logo SIICOM-MX (1).png" alt="Logo SIICOM">
+<div class="reporte">
+  <h1>Reporte de Servicio</h1>
 
-    <div class="registro-container">
-      <h2>Registrar Servicio Realizado</h2>
+  <div class="campo"><label>Cliente</label><div id="rCliente" class="valor"></div></div>
+  <div class="campo"><label>Tipo</label><div id="rTipo" class="valor"></div></div>
 
-      <form id="formServicio">
-
-        <!-- CLIENTE -->
-        <label for="cliente">Cliente</label>
-        <select id="cliente" name="cliente" required>
-          <option value="">-- Selecciona un cliente --</option>
-          <option>Dacis</option>
-          <option>Bakertilly</option>
-          <option>Comextaa</option>
-          <option>Grupo Francisco</option>
-          <option>TAM</option>
-          <option>Pompa y asociados</option>
-          <option>Inecex</option>
-          <option>Verum</option>
-          <option>GCB</option>
-          <option>Comisa</option>
-          <option value="otro">Otro (agregar manualmente)</option>
-        </select>
-
-        <div id="otroClienteContainer" class="hidden">
-          <label for="otroCliente">Nombre del nuevo cliente</label>
-          <input type="text" id="otroCliente" name="otroCliente">
-        </div>
-
-        <!-- TIPO DE SERVICIO -->
-        <label for="tipo">Tipo de Servicio</label>
-        <select id="tipo" name="tipo" required>
-          <option value="">-- Selecciona el tipo --</option>
-          <option value="hardware">Hardware</option>
-          <option value="software">Software</option>
-          <option value="visita_general">Visita general</option>
-          <option value="recoleccion">Recolección de equipo</option>
-          <option value="ticket">Atención a ticket</option>
-        </select>
-
-        <!-- RECOLECCIÓN -->
-        <div id="recoleccionContainer" class="hidden">
-
-          <label for="serie">N/S o Service Tag</label>
-          <input type="text" id="serie" name="serie">
-
-          <label for="marcaModelo">Marca y modelo del equipo</label>
-          <input type="text" id="marcaModelo" name="marcaModelo">
-
-          <label>¿Incluye cargador?</label>
-          <div class="radio-group">
-            <label><input type="radio" name="cargador" value="Sí"> Sí</label>
-            <label><input type="radio" name="cargador" value="No"> No</label>
-          </div>
-
-        </div>
-
-        <!-- TICKET -->
-        <div id="ticketContainer" class="hidden">
-
-          <label for="numeroTicket">Número de ticket</label>
-          <input type="text" id="numeroTicket" name="numeroTicket">
-
-          <label for="comentariosTicket">Comentarios del ticket</label>
-          <textarea id="comentariosTicket" name="comentariosTicket" rows="3"></textarea>
-
-        </div>
-
-        <!-- TÍTULO -->
-        <div id="tituloContainer">
-          <label for="titulo">Título del Servicio</label>
-          <input type="text" id="titulo" name="titulo" required>
-        </div>
-
-        <!-- DETALLES -->
-        <label for="detalles">Detalles del Servicio</label>
-        <textarea id="detalles" name="detalles" rows="4" required></textarea>
-
-        <!-- FIRMA -->
-        <label for="firma">
-          Nombre de quien autoriza / firma 
-          <small>(debe ser la misma persona que solicitó el ticket o un encargado que lo valide)</small>
-        </label>
-        <input type="text" id="firma" name="firma" required>
-
-        <button type="submit">Generar reporte</button>
-
-      </form>
-    </div>
+  <!-- RECOLECCIÓN -->
+  <div id="recoleccionData" style="display:none;">
+    <div class="campo"><label>N/S</label><div id="rSerie" class="valor"></div></div>
+    <div class="campo"><label>Marca/Modelo</label><div id="rMarcaModelo" class="valor"></div></div>
+    <div class="campo"><label>Cargador</label><div id="rCargador" class="valor"></div></div>
   </div>
+
+  <!-- TICKET -->
+  <div id="ticketData" style="display:none;">
+    <div class="campo"><label>No. Ticket</label><div id="rNumeroTicket" class="valor"></div></div>
+    <div class="campo"><label>Comentarios</label><div id="rComentariosTicket" class="valor"></div></div>
+  </div>
+
+  <div class="campo" id="tituloContainer">
+    <label>Título</label>
+    <div id="rTitulo" class="valor"></div>
+  </div>
+
+  <div class="campo"><label>Detalles</label><div id="rDetalles" class="valor"></div></div>
+  <div class="campo"><label>Firma</label><div id="rFirma" class="valor"></div></div>
+  <div class="campo"><label>Fecha</label><div id="rFecha" class="valor"></div></div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const data = JSON.parse(localStorage.getItem("reporteData"));
+
+  const tipos = {
+    hardware: "Hardware",
+    software: "Software",
+    visita_general: "Visita general",
+    recoleccion: "Recolección de equipo",
+    ticket: "Atención a ticket"
+  };
+
+  document.getElementById("rCliente").textContent = data.cliente;
+  document.getElementById("rTipo").textContent = tipos[data.tipo];
+
+  document.getElementById("rDetalles").textContent = data.detalles;
+  document.getElementById("rFirma").textContent = data.firma;
+  document.getElementById("rFecha").textContent = data.fecha;
+
+  if (!data.titulo) {
+    document.getElementById("tituloContainer").style.display = "none";
+  } else {
+    document.getElementById("rTitulo").textContent = data.titulo;
+  }
+
+  if (data.recoleccion) {
+    document.getElementById("recoleccionData").style.display = "block";
+    document.getElementById("rSerie").textContent = data.recoleccion.serie;
+    document.getElementById("rMarcaModelo").textContent = data.recoleccion.marcaModelo;
+    document.getElementById("rCargador").textContent = data.recoleccion.cargador;
+  }
+
+  if (data.ticket) {
+    document.getElementById("ticketData").style.display = "block";
+    document.getElementById("rNumeroTicket").textContent = data.ticket.numero;
+    document.getElementById("rComentariosTicket").textContent = data.ticket.comentarios;
+  }
+
+});
+</script>
 
 </body>
 </html>
