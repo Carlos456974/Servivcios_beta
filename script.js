@@ -2,9 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.getElementById("formServicio");
 
-  /* ===============================
-     CLIENTE
-  =============================== */
   const clienteSelect = document.getElementById("cliente");
   const otroClienteContainer = document.getElementById("otroClienteContainer");
   const otroClienteInput = document.getElementById("otroCliente");
@@ -20,9 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ===============================
-     TIPO DE SERVICIO
-  =============================== */
   const tipoServicio = document.getElementById("tipo");
   const recoleccionContainer = document.getElementById("recoleccionContainer");
 
@@ -37,28 +31,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (tipoServicio.value === "recoleccion") {
 
-      // Mostrar datos de recolección
       recoleccionContainer.classList.remove("hidden");
 
-      // Ocultar SOLO el título
       tituloContainer.classList.add("hidden");
       tituloInput.required = false;
       tituloInput.value = "";
 
-      // Requeridos para recolección
       serieInput.required = true;
       marcaModeloInput.required = true;
 
     } else {
 
-      // Ocultar datos de recolección
       recoleccionContainer.classList.add("hidden");
 
-      // Mostrar título nuevamente
       tituloContainer.classList.remove("hidden");
       tituloInput.required = true;
 
-      // Limpiar campos de recolección
       serieInput.required = false;
       marcaModeloInput.required = false;
 
@@ -68,9 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ===============================
-     ENVÍO DEL FORMULARIO
-  =============================== */
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -79,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (input.checked) cargadorValor = input.value;
     });
 
-    // Validación extra solo para recolección
     if (tipoServicio.value === "recoleccion" && cargadorValor === "") {
       alert("Indica si el equipo incluye cargador.");
       return;
@@ -105,14 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
         : null
     };
 
-    // Guardar información
     localStorage.setItem("reporteData", JSON.stringify(data));
 
-    // 🔴 REDIRECCIÓN CORRECTA (ESTE ERA EL ERROR)
     window.location.href = "reportes.html";
   });
 
 });
-
-
-
