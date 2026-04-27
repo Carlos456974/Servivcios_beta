@@ -18,17 +18,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const tipoServicio = document.getElementById("tipo");
+
   const recoleccionContainer = document.getElementById("recoleccionContainer");
+  const ticketContainer = document.getElementById("ticketContainer");
 
   const tituloContainer = document.getElementById("tituloContainer");
   const tituloInput = document.getElementById("titulo");
 
   const serieInput = document.getElementById("serie");
   const marcaModeloInput = document.getElementById("marcaModelo");
+
+  const numeroTicketInput = document.getElementById("numeroTicket");
+  const comentariosTicketInput = document.getElementById("comentariosTicket");
+
   const cargadorInputs = document.querySelectorAll('input[name="cargador"]');
 
   tipoServicio.addEventListener("change", () => {
 
+    // RESET
+    recoleccionContainer.classList.add("hidden");
+    ticketContainer.classList.add("hidden");
+
+    serieInput.required = false;
+    marcaModeloInput.required = false;
+    numeroTicketInput.required = false;
+    comentariosTicketInput.required = false;
+
+    serieInput.value = "";
+    marcaModeloInput.value = "";
+    numeroTicketInput.value = "";
+    comentariosTicketInput.value = "";
+
+    cargadorInputs.forEach(input => input.checked = false);
+
+    tituloContainer.classList.remove("hidden");
+    tituloInput.required = true;
+
+    // RECOLECCIÓN
     if (tipoServicio.value === "recoleccion") {
 
       recoleccionContainer.classList.remove("hidden");
@@ -39,21 +65,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       serieInput.required = true;
       marcaModeloInput.required = true;
-
-    } else {
-
-      recoleccionContainer.classList.add("hidden");
-
-      tituloContainer.classList.remove("hidden");
-      tituloInput.required = true;
-
-      serieInput.required = false;
-      marcaModeloInput.required = false;
-
-      serieInput.value = "";
-      marcaModeloInput.value = "";
-      cargadorInputs.forEach(input => input.checked = false);
     }
+
+    // TICKET
+    if (tipoServicio.value === "ticket") {
+
+      ticketContainer.classList.remove("hidden");
+
+      numeroTicketInput.required = true;
+      comentariosTicketInput.required = true;
+    }
+
   });
 
   form.addEventListener("submit", (e) => {
@@ -85,6 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
             serie: serieInput.value,
             marcaModelo: marcaModeloInput.value,
             cargador: cargadorValor
+          }
+        : null,
+
+      ticket: tipoServicio.value === "ticket"
+        ? {
+            numero: numeroTicketInput.value,
+            comentarios: comentariosTicketInput.value
           }
         : null
     };
