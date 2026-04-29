@@ -3,21 +3,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #ffffff; /* Fondo blanco */
+  background-color: #ffffff;
   color: #000;
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
   box-sizing: border-box;
 }
 
 /* === INDEX === */
 .index-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrado vertical */
-  align-items: center;     /* Centrado horizontal */
+  justify-content: center;
+  align-items: center;
   text-align: center;
   padding: 20px;
   min-height: 100vh;
@@ -56,14 +53,14 @@ body {
 
 /* === REGISTRO === */
 .registro-wrapper {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrado vertical */
-  align-items: center; /* Centrado horizontal */
+  justify-content: center; /* PC centrado */
+  align-items: center;
+
+  min-height: 100vh;
   padding: 40px 20px;
   background-color: #ffffff;
-  min-height: 100vh;
   box-sizing: border-box;
 }
 
@@ -208,6 +205,7 @@ body {
 
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
+
   .index-container {
     padding: 10px;
   }
@@ -221,7 +219,9 @@ body {
     padding: 12px 25px;
   }
 
+  /* 🔥 CLAVE PARA CELULAR */
   .registro-wrapper {
+    justify-content: flex-start; /* evita centrado raro */
     padding: 20px 10px;
   }
 
@@ -240,6 +240,7 @@ body {
 }
 
 @media (max-width: 480px) {
+
   .index-container img.logo {
     width: clamp(160px, 60vw, 210px);
   }
@@ -254,13 +255,21 @@ body {
   }
 
   .registro-container {
-    padding: 35px 22px;
+    padding: 30px 20px;
     max-width: 96%;
   }
 
   .reporte-container {
     padding: 25px 15px;
   }
+
+  .registro-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .registro-container input,
+  .registro-container textarea,
+  .registro-container select {
+    font-size: 16px; /* 🔥 evita zoom en iPhone */
+  }
 }
-
-
