@@ -51,17 +51,13 @@ function contenido(){
  <b>Fecha:</b><div class="valor">${data.fecha}</div>
  `;
 
- if(data.titulo && data.tipo !== "entrega"){
-  html += `<b>Título:</b><div class="valor">${data.titulo}</div>`;
- }
-
  if(data.detalles){
   html += `<b>Detalles:</b><div class="valor">${data.detalles}</div>`;
  }
 
  if(data.entrega){
   html += `
-  <b>Marca:</b><div class="valor">${data.entrega.marca}</div>
+  <b>Marca:</b><div class="valor">${data.entrega.marca === "na" ? "N/A" : data.entrega.marca}</div>
   <b>Modelo:</b><div class="valor">${data.entrega.modelo}</div>
   <b>N/S:</b><div class="valor">${data.entrega.serie}</div>
   <b>¿Se cambiaron piezas?:</b><div class="valor">${data.entrega.cambio}</div>
@@ -69,7 +65,7 @@ function contenido(){
 
   if(data.entrega.cambio === "si"){
     html += `
-    <b>Pieza:</b><div class="valor">${data.entrega.pieza.tipo}</div>
+    <b>Tipo de pieza:</b><div class="valor">${data.entrega.pieza.tipo}</div>
     <b>Serie vieja:</b><div class="valor">${data.entrega.pieza.vieja}</div>
     <b>Serie nueva:</b><div class="valor">${data.entrega.pieza.nueva}</div>
     `;
