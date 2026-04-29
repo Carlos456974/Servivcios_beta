@@ -17,7 +17,6 @@
 
     <form id="formServicio">
 
-      <!-- CLIENTE -->
       <label>Cliente</label>
       <select id="cliente" required>
         <option value="">-- Selecciona un cliente --</option>
@@ -38,41 +37,23 @@
         <input type="text" id="otroCliente" placeholder="Nuevo cliente">
       </div>
 
-      <!-- TIPO -->
       <label>Tipo</label>
       <select id="tipo" required>
-        <option value="">-- Selecciona --</option>
-        <option value="hardware">Hardware</option>
-        <option value="software">Software</option>
-        <option value="visita_general">Visita general</option>
-        <option value="recoleccion">Recolección</option>
-        <option value="ticket">Atención a ticket</option>
         <option value="entrega">Entrega de equipo</option>
       </select>
 
-      <!-- RECOLECCION -->
-      <div id="recoleccionContainer" class="hidden">
-        <input id="serie" placeholder="N/S">
-        <input id="marcaModelo" placeholder="Marca/Modelo">
-      </div>
-
-      <!-- TICKET -->
-      <div id="ticketContainer" class="hidden">
-        <input id="numeroTicket" placeholder="No. Ticket">
-        <textarea id="comentariosTicket" placeholder="Comentarios"></textarea>
-      </div>
-
       <!-- ENTREGA -->
-      <div id="entregaContainer" class="hidden">
+      <div id="entregaContainer">
 
         <label>Marca</label>
-        <select id="marcaEntrega">
+        <select id="marcaEntrega" required>
           <option value="">-- Selecciona --</option>
           <option>Lenovo</option>
           <option>HP</option>
           <option>Asus</option>
           <option>Macbook</option>
           <option>Dell</option>
+          <option value="na">N/A</option>
           <option value="otro">Otro</option>
         </select>
 
@@ -84,7 +65,7 @@
         <input id="serieEntrega" placeholder="Nombre o N/S">
 
         <label>¿Se cambiaron piezas?</label>
-        <select id="cambioPiezas">
+        <select id="cambioPiezas" required>
           <option value="">-- Selecciona --</option>
           <option value="no">No</option>
           <option value="si">Sí</option>
@@ -98,16 +79,10 @@
 
       </div>
 
-      <!-- TITULO -->
-      <input id="titulo" placeholder="Título">
-
-      <!-- DETALLES -->
       <textarea id="detalles" placeholder="Detalles"></textarea>
 
-      <!-- FIRMA -->
       <input id="firma" placeholder="Firma cliente" required>
 
-      <!-- TECNICO -->
       <label>Personal</label>
       <select id="tecnico" required>
         <option value="">-- Selecciona --</option>
