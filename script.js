@@ -13,6 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const cambioPiezas = document.getElementById("cambioPiezas");
   const piezasContainer = document.getElementById("piezasContainer");
 
+  const marcaEntrega = document.getElementById("marcaEntrega");
+  const marcaOtroContainer = document.getElementById("marcaOtroContainer");
+  const marcaOtra = document.getElementById("marcaOtra");
+
+  const titulo = document.getElementById("titulo");
+
   // CLIENTE
   cliente.addEventListener("change", () => {
     if (cliente.value === "otro") {
@@ -22,12 +28,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // MARCA OTRO
+  marcaEntrega.addEventListener("change", () => {
+    if (marcaEntrega.value === "otro") {
+      marcaOtroContainer.classList.remove("hidden");
+    } else {
+      marcaOtroContainer.classList.add("hidden");
+      marcaOtra.value = "";
+    }
+  });
+
   // TIPO
   tipo.addEventListener("change", () => {
 
     recoleccion.classList.add("hidden");
     ticket.classList.add("hidden");
     entrega.classList.add("hidden");
+
+    titulo.style.display = "block";
 
     if (tipo.value === "recoleccion") {
       recoleccion.classList.remove("hidden");
@@ -39,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (tipo.value === "entrega") {
       entrega.classList.remove("hidden");
+      titulo.style.display = "none";
+      titulo.value = "";
     }
 
   });
@@ -58,29 +78,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = {
       cliente: cliente.value === "otro" ? otroInput.value : cliente.value,
       tipo: tipo.value,
-      titulo: document.getElementById("titulo").value,
+      titulo: titulo.value,
       detalles: document.getElementById("detalles").value,
       firma: document.getElementById("firma").value,
       tecnico: document.getElementById("tecnico").value,
       fecha: new Date().toLocaleDateString(),
 
-      recoleccion: tipo.value === "recoleccion"
-        ? {
-            serie: document.getElementById("serie").value,
-            marca: document.getElementById("marcaModelo").value
-          }
-        : null,
-
-      ticket: tipo.value === "ticket"
-        ? {
-            numero: document.getElementById("numeroTicket").value,
-            comentarios: document.getElementById("comentariosTicket").value
-          }
-        : null,
-
       entrega: tipo.value === "entrega"
         ? {
-            marca: document.getElementById("marcaEntrega").value,
+            marca: marcaEntrega.value === "otro" ? marcaOtra.value : marcaEntrega.value,
             modelo: document.getElementById("modeloEntrega").value,
             serie: document.getElementById("serieEntrega").value,
             cambio: cambioPiezas.value,
