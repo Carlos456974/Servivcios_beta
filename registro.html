@@ -31,11 +31,11 @@
         <option>Verum</option>
         <option>GCB</option>
         <option>Comisa</option>
-        <option value="otro">Otro (agregar manualmente)</option>
+        <option value="otro">Otro</option>
       </select>
 
       <div id="otroClienteContainer" class="hidden">
-        <input type="text" id="otroCliente" placeholder="Nombre del cliente">
+        <input type="text" id="otroCliente" placeholder="Nuevo cliente">
       </div>
 
       <!-- TIPO -->
@@ -47,6 +47,7 @@
         <option value="visita_general">Visita general</option>
         <option value="recoleccion">Recolección</option>
         <option value="ticket">Atención a ticket</option>
+        <option value="entrega">Entrega de equipo</option>
       </select>
 
       <!-- RECOLECCION -->
@@ -61,21 +62,48 @@
         <textarea id="comentariosTicket" placeholder="Comentarios"></textarea>
       </div>
 
-      <!-- TITULO -->
-      <div id="tituloContainer">
-        <input id="titulo" placeholder="Título">
+      <!-- ENTREGA -->
+      <div id="entregaContainer" class="hidden">
+
+        <label>Marca</label>
+        <select id="marcaEntrega">
+          <option value="">-- Selecciona --</option>
+          <option>Lenovo</option>
+          <option>HP</option>
+          <option>Asus</option>
+          <option>Macbook</option>
+          <option>Dell</option>
+        </select>
+
+        <input id="modeloEntrega" placeholder="Modelo">
+        <input id="serieEntrega" placeholder="Nombre o N/S">
+
+        <label>¿Se cambiaron piezas?</label>
+        <select id="cambioPiezas">
+          <option value="">-- Selecciona --</option>
+          <option value="no">No</option>
+          <option value="si">Sí</option>
+        </select>
+
+        <div id="piezasContainer" class="hidden">
+          <input id="tipoPieza" placeholder="Tipo de pieza">
+          <input id="serieVieja" placeholder="Serie pieza dañada">
+          <input id="serieNueva" placeholder="Serie pieza nueva">
+        </div>
+
       </div>
 
+      <!-- TITULO -->
+      <input id="titulo" placeholder="Título">
+
       <!-- DETALLES -->
-      <div id="detallesContainer">
-        <textarea id="detalles" placeholder="Detalles"></textarea>
-      </div>
+      <textarea id="detalles" placeholder="Detalles"></textarea>
 
       <!-- FIRMA -->
       <input id="firma" placeholder="Firma cliente" required>
 
       <!-- TECNICO -->
-      <label>Personal que atendió</label>
+      <label>Personal</label>
       <select id="tecnico" required>
         <option value="">-- Selecciona --</option>
         <option>Dylan (Auxiliar)</option>
