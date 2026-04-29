@@ -2,98 +2,106 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro de Servicio | SIICOM</title>
+  <title>Registro</title>
   <link rel="stylesheet" href="styles.css">
   <script defer src="script.js"></script>
 </head>
 <body>
 
-<div class="registro-wrapper">
-  <img src="imagenes/Logo SIICOM-MX (1).png">
+<div class="registro-container">
+<form id="formServicio">
 
-  <div class="registro-container">
-    <h2>Registrar Servicio</h2>
+<label>Cliente</label>
+<select id="cliente" required>
+<option value="">-- Selecciona --</option>
+<option>Dacis</option>
+<option>GCB</option>
+<option value="otro">Otro</option>
+</select>
 
-    <form id="formServicio">
+<div id="otroClienteContainer" class="hidden">
+<input id="otroCliente" placeholder="Nuevo cliente">
+</div>
 
-      <label>Cliente</label>
-      <select id="cliente" required>
-        <option value="">-- Selecciona un cliente --</option>
-        <option>Dacis</option>
-        <option>Bakertilly</option>
-        <option>Comextaa</option>
-        <option>Grupo Francisco</option>
-        <option>TAM</option>
-        <option>Pompa y asociados</option>
-        <option>Inecex</option>
-        <option>Verum</option>
-        <option>GCB</option>
-        <option>Comisa</option>
-        <option value="otro">Otro</option>
-      </select>
+<label>Tipo de servicio</label>
+<select id="tipo" required>
+<option value="">-- Selecciona --</option>
+<option value="hardware">Hardware</option>
+<option value="software">Software</option>
+<option value="visita_general">Visita general</option>
+<option value="recoleccion">Recolección</option>
+<option value="ticket">Atención a ticket</option>
+<option value="entrega">Entrega de equipo</option>
+</select>
 
-      <div id="otroClienteContainer" class="hidden">
-        <input type="text" id="otroCliente" placeholder="Nuevo cliente">
-      </div>
+<!-- RECOLECCION -->
+<div id="recoleccionContainer" class="hidden">
+<input id="serie" placeholder="N/S">
+<input id="marcaModelo" placeholder="Marca/Modelo">
+</div>
 
-      <label>Tipo</label>
-      <select id="tipo" required>
-        <option value="entrega">Entrega de equipo</option>
-      </select>
+<!-- TICKET -->
+<div id="ticketContainer" class="hidden">
+<input id="numeroTicket" placeholder="No. Ticket">
+<textarea id="comentariosTicket"></textarea>
+</div>
 
-      <!-- ENTREGA -->
-      <div id="entregaContainer">
+<!-- ENTREGA -->
+<div id="entregaContainer" class="hidden">
 
-        <label>Marca</label>
-        <select id="marcaEntrega" required>
-          <option value="">-- Selecciona --</option>
-          <option>Lenovo</option>
-          <option>HP</option>
-          <option>Asus</option>
-          <option>Macbook</option>
-          <option>Dell</option>
-          <option value="na">N/A</option>
-          <option value="otro">Otro</option>
-        </select>
+<label>Marca</label>
+<select id="marcaEntrega">
+<option value="">-- Selecciona --</option>
+<option>Lenovo</option>
+<option>HP</option>
+<option>Asus</option>
+<option>Macbook</option>
+<option>Dell</option>
+<option value="na">N/A</option>
+<option value="otro">Otro</option>
+</select>
 
-        <div id="marcaOtroContainer" class="hidden">
-          <input id="marcaOtra" placeholder="Especifica la marca">
-        </div>
+<div id="marcaOtroContainer" class="hidden">
+<input id="marcaOtra" placeholder="Especifica la marca">
+</div>
 
-        <input id="modeloEntrega" placeholder="Modelo">
-        <input id="serieEntrega" placeholder="Nombre o N/S">
+<input id="modeloEntrega" placeholder="Modelo">
+<input id="serieEntrega" placeholder="Nombre o N/S">
 
-        <label>¿Se cambiaron piezas?</label>
-        <select id="cambioPiezas" required>
-          <option value="">-- Selecciona --</option>
-          <option value="no">No</option>
-          <option value="si">Sí</option>
-        </select>
+<label>¿Se cambiaron piezas?</label>
+<select id="cambioPiezas">
+<option value="">-- Selecciona --</option>
+<option value="no">No</option>
+<option value="si">Sí</option>
+</select>
 
-        <div id="piezasContainer" class="hidden">
-          <input id="tipoPieza" placeholder="Tipo de pieza">
-          <input id="serieVieja" placeholder="Serie pieza dañada">
-          <input id="serieNueva" placeholder="Serie pieza nueva">
-        </div>
+<div id="piezasContainer" class="hidden">
+<input id="tipoPieza" placeholder="Tipo de pieza">
+<input id="serieVieja" placeholder="Serie vieja">
+<input id="serieNueva" placeholder="Serie nueva">
+</div>
 
-      </div>
+</div>
 
-      <textarea id="detalles" placeholder="Detalles"></textarea>
+<!-- TITULO -->
+<input id="titulo" placeholder="Título">
 
-      <input id="firma" placeholder="Firma cliente" required>
+<!-- DETALLES -->
+<textarea id="detalles" placeholder="Detalles"></textarea>
 
-      <label>Personal</label>
-      <select id="tecnico" required>
-        <option value="">-- Selecciona --</option>
-        <option>Dylan (Auxiliar)</option>
-        <option>Carlos Dorantes (Encargado de TI)</option>
-      </select>
+<!-- FIRMA -->
+<input id="firma" placeholder="Firma cliente" required>
 
-      <button type="submit">Generar reporte</button>
+<label>Personal</label>
+<select id="tecnico" required>
+<option value="">-- Selecciona --</option>
+<option>Dylan (Auxiliar)</option>
+<option>Carlos Dorantes (Encargado de TI)</option>
+</select>
 
-    </form>
-  </div>
+<button type="submit">Generar reporte</button>
+
+</form>
 </div>
 
 </body>
