@@ -5,171 +5,73 @@
 <title>Reporte</title>
 
 <style>
-body {
-  font-family: Arial;
-  background:#f4f6f8;
-}
-
-.hoja {
-  max-width:800px;
-  margin:30px auto;
-  background:#fff;
-  padding:25px;
-  page-break-after: always;
-}
-
-.valor {
-  background:#eee;
-  padding:8px;
-  margin-bottom:10px;
-}
-
-.firmas {
-  margin-top:50px;
-  display:flex;
-  justify-content:space-between;
-}
-
-.firma {
-  width:45%;
-  text-align:center;
-}
-
-.firma hr {
-  margin-bottom:5px;
-}
-
-.titulo {
-  text-align:center;
-  color:#154C52;
-}
-
-.acciones {
-  text-align:center;
-  margin-top:20px;
-}
-
-@media print {
-  .acciones {display:none;}
-}
+body {font-family: Arial; background:#f4f6f8;}
+.hoja {max-width:800px; margin:30px auto; background:#fff; padding:25px; page-break-after: always;}
+.valor {background:#eee; padding:8px; margin-bottom:10px;}
+.firmas {margin-top:50px; display:flex; justify-content:space-between;}
+.firma {width:45%; text-align:center;}
+.firma hr {margin-bottom:5px;}
+@media print {.acciones{display:none;}}
 </style>
 </head>
 
 <body>
 
-<!-- 🟢 HOJA CLIENTE -->
 <div class="hoja">
-<h2 class="titulo">Reporte de Servicio (Cliente)</h2>
+<h2>Reporte Cliente</h2>
 <div id="cContenido"></div>
 
 <div class="firmas">
-  <div class="firma">
-    <hr>
-    <p id="cFirma"></p>
-    <small>Firma del cliente</small>
-  </div>
-
-  <div class="firma">
-    <hr>
-    <p id="cTecnico"></p>
-    <small>Firma del personal</small>
-  </div>
+<div class="firma"><hr><p id="cFirma"></p><small>Firma cliente</small></div>
+<div class="firma"><hr><p id="cTecnico"></p><small>Firma técnico</small></div>
+</div>
 </div>
 
-</div>
-
-<!-- 🔵 HOJA INTERNA -->
 <div class="hoja">
-<h2 class="titulo">Reporte de Servicio (Interno)</h2>
+<h2>Reporte Interno</h2>
 <div id="iContenido"></div>
 
 <div class="firmas">
-  <div class="firma">
-    <hr>
-    <p id="iFirma"></p>
-    <small>Firma del cliente</small>
-  </div>
-
-  <div class="firma">
-    <hr>
-    <p id="iTecnico"></p>
-    <small>Firma del personal</small>
-  </div>
+<div class="firma"><hr><p id="iFirma"></p><small>Firma cliente</small></div>
+<div class="firma"><hr><p id="iTecnico"></p><small>Firma técnico</small></div>
 </div>
-
 </div>
 
 <div class="acciones">
-  <button onclick="window.print()">Imprimir</button>
+<button onclick="window.print()">Imprimir</button>
 </div>
 
 <script>
 const data = JSON.parse(localStorage.getItem("reporteData"));
 
-// MAPA DE TIPOS PARA VER BONITO
-const tipos = {
-  hardware: "Hardware",
-  software: "Software",
-  visita_general: "Visita general",
-  recoleccion: "Recolección de equipo",
-  ticket: "Atención a ticket",
-  entrega: "Entrega de equipo"
-};
-
 function contenido(){
-
  let html = `
- <b>Cliente:</b><div class="valor">${data.cliente || "-"}</div>
- <b>Tipo:</b><div class="valor">${tipos[data.tipo] || data.tipo}</div>
- <b>Fecha:</b><div class="valor">${data.fecha || "-"}</div>
+ <b>Cliente:</b><div class="valor">${data.cliente}</div>
+ <b>Tipo:</b><div class="valor">${data.tipo}</div>
+ <b>Fecha:</b><div class="valor">${data.fecha}</div>
  `;
 
- if(data.titulo){
+ if(data.titulo && data.tipo !== "entrega"){
   html += `<b>Título:</b><div class="valor">${data.titulo}</div>`;
  }
 
- // 🟡 TICKET
- if(data.ticket){
-  html += `
-  <b>No. Ticket:</b><div class="valor">${data.ticket.numero}</div>
-  <b>Comentarios:</b><div class="valor">${data.ticket.comentarios}</div>
-  `;
- }
-
- // 🔵 DETALLES (solo si no es ticket)
- if(!data.ticket && data.detalles){
+ if(data.detalles){
   html += `<b>Detalles:</b><div class="valor">${data.detalles}</div>`;
  }
 
- // 🟢 RECOLECCIÓN
- if(data.recoleccion){
-  html += `
-  <b>N/S:</b><div class="valor">${data.recoleccion.serie}</div>
-  <b>Marca/Modelo:</b><div class="valor">${data.recoleccion.marca}</div>
-  `;
- }
-
- // 🟣 ENTREGA
  if(data.entrega){
   html += `
   <b>Marca:</b><div class="valor">${data.entrega.marca}</div>
   <b>Modelo:</b><div class="valor">${data.entrega.modelo}</div>
   <b>N/S:</b><div class="valor">${data.entrega.serie}</div>
+  <b>¿Se cambiaron piezas?:</b><div class="valor">${data.entrega.cambio}</div>
   `;
 
   if(data.entrega.cambio === "si"){
     html += `
-    <b>Tipo de pieza:</b><div class="valor">${data.entrega.pieza.tipo}</div>
-    <b>Serie pieza dañada:</b><div class="valor">${data.entrega.pieza.vieja}</div>
-    <b>Serie pieza nueva:</b><div class="valor">${data.entrega.pieza.nueva}</div>
-
-    <div style="margin-top:15px; padding:12px; border:1px solid #ccc; font-size:13px;">
-    ⚠️ <b>Nota importante:</b><br>
-    Si en su equipo se realizó un cambio de pieza, es fundamental verificar que se le entregue la pieza sustituida.
-    Esto tiene como objetivo evitar malos entendidos y garantizar la transparencia del servicio brindado.<br><br>
-    Quedamos a sus órdenes.<br>
-    <b>SIICOM</b>
-    </div>
+    <b>Pieza:</b><div class="valor">${data.entrega.pieza.tipo}</div>
+    <b>Serie vieja:</b><div class="valor">${data.entrega.pieza.vieja}</div>
+    <b>Serie nueva:</b><div class="valor">${data.entrega.pieza.nueva}</div>
     `;
   }
  }
@@ -177,17 +79,13 @@ function contenido(){
  return html;
 }
 
-// LLENAR AMBAS HOJAS
 document.getElementById("cContenido").innerHTML = contenido();
 document.getElementById("iContenido").innerHTML = contenido();
 
-// FIRMAS
-document.getElementById("cFirma").textContent = data.firma || "";
-document.getElementById("iFirma").textContent = data.firma || "";
-
-document.getElementById("cTecnico").textContent = data.tecnico || "";
-document.getElementById("iTecnico").textContent = data.tecnico || "";
-
+document.getElementById("cFirma").textContent = data.firma;
+document.getElementById("iFirma").textContent = data.firma;
+document.getElementById("cTecnico").textContent = data.tecnico;
+document.getElementById("iTecnico").textContent = data.tecnico;
 </script>
 
 </body>
