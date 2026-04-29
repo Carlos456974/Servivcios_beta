@@ -8,18 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const recoleccion = document.getElementById("recoleccionContainer");
   const ticket = document.getElementById("ticketContainer");
+  const entrega = document.getElementById("entregaContainer");
 
-  const detallesContainer = document.getElementById("detallesContainer");
+  const cambioPiezas = document.getElementById("cambioPiezas");
+  const piezasContainer = document.getElementById("piezasContainer");
 
-  // CLIENTE "OTRO"
+  // CLIENTE
   cliente.addEventListener("change", () => {
     if (cliente.value === "otro") {
       otroContainer.classList.remove("hidden");
-      otroInput.required = true;
     } else {
       otroContainer.classList.add("hidden");
-      otroInput.required = false;
-      otroInput.value = "";
     }
   });
 
@@ -28,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     recoleccion.classList.add("hidden");
     ticket.classList.add("hidden");
-    detallesContainer.classList.remove("hidden");
+    entrega.classList.add("hidden");
 
     if (tipo.value === "recoleccion") {
       recoleccion.classList.remove("hidden");
@@ -36,9 +35,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (tipo.value === "ticket") {
       ticket.classList.remove("hidden");
-      detallesContainer.classList.add("hidden");
     }
 
+    if (tipo.value === "entrega") {
+      entrega.classList.remove("hidden");
+    }
+
+  });
+
+  // PIEZAS
+  cambioPiezas.addEventListener("change", () => {
+    if (cambioPiezas.value === "si") {
+      piezasContainer.classList.remove("hidden");
+    } else {
+      piezasContainer.classList.add("hidden");
+    }
   });
 
   document.getElementById("formServicio").addEventListener("submit", e => {
@@ -64,6 +75,22 @@ document.addEventListener("DOMContentLoaded", () => {
         ? {
             numero: document.getElementById("numeroTicket").value,
             comentarios: document.getElementById("comentariosTicket").value
+          }
+        : null,
+
+      entrega: tipo.value === "entrega"
+        ? {
+            marca: document.getElementById("marcaEntrega").value,
+            modelo: document.getElementById("modeloEntrega").value,
+            serie: document.getElementById("serieEntrega").value,
+            cambio: cambioPiezas.value,
+            pieza: cambioPiezas.value === "si"
+              ? {
+                  tipo: document.getElementById("tipoPieza").value,
+                  vieja: document.getElementById("serieVieja").value,
+                  nueva: document.getElementById("serieNueva").value
+                }
+              : null
           }
         : null
     };
